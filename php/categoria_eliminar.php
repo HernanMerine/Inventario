@@ -1,54 +1,52 @@
 <?php
-	/*== Almacenando datos ==*/
-    $category_id_del=limpiar_cadena($_GET['category_id_del']);
+require_once "main.php";
 
-    /*== Verificando usuario ==*/
-    $check_categoria=conexion();
-    $check_categoria=$check_categoria->query("SELECT categoria_id FROM categoria WHERE categoria_id='$category_id_del'");
-    
-    if($check_categoria->rowCount()==1){
+/* Almacenando datos */
+$category_id_del = limpiar_cadena($_GET['category_id_del']);
 
-    	$check_productos=conexion();
-    	$check_productos=$check_productos->query("SELECT categoria_id FROM producto WHERE categoria_id='$category_id_del' LIMIT 1");
+/*Verificando usuario*/
+$conexion = conexion();
+$query_categoria = "SELECT categoria_id FROM categoria WHERE categoria_id = '$category_id_del'";
+$result_categoria = mysqli_query($conexion, $query_categoria);
 
-    	if($check_productos->rowCount()<=0){
+if (mysqli_num_rows($result_categoria) == 1) {
+    $query_productos = "SELECT categoria_id FROM producto WHERE categoria_id = '$category_id_del' LIMIT 1";
+    $result_productos = mysqli_query($conexion, $query_productos);
 
-    		$eliminar_categoria=conexion();
-	    	$eliminar_categoria=$eliminar_categoria->prepare("DELETE FROM categoria WHERE categoria_id=:id");
+    if (mysqli_num_rows($result_productos) <= 0) {
+        $query_eliminar = "DELETE FROM categoria WHERE categoria_id = '$category_id_del'";
+        $result_eliminar = mysqli_query($conexion, $query_eliminar);
 
-	    	$eliminar_categoria->execute([":id"=>$category_id_del]);
-
-	    	if($eliminar_categoria->rowCount()==1){
-		        echo '
-		            <div class="notification is-info is-light">
-		                <strong>¡CATEGORIA ELIMINADA!</strong><br>
-		                Los datos de la categoría se eliminaron con exito
-		            </div>
-		        ';
-		    }else{
-		        echo '
-		            <div class="notification is-danger is-light">
-		                <strong>¡Ocurrio un error inesperado!</strong><br>
-		                No se pudo eliminar la categoría, por favor intente nuevamente
-		            </div>
-		        ';
-		    }
-		    $eliminar_categoria=null;
-    	}else{
-    		echo '
-	            <div class="notification is-danger is-light">
-	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                No podemos eliminar la categoría ya que tiene productos asociados
-	            </div>
-	        ';
-    	}
-    	$check_productos=null;
-    }else{
-    	echo '
+        if (mysqli_affected_rows($conexion) == 1) {
+            echo '
+                <div class="notification is-info is-light">
+                    <strong>¡CATEGORIA ELIMINADA!</strong><br>
+                    Los datos de la categoría se eliminaron con éxito
+                </div>
+            ';
+        } else {
+            echo '
+                <div class="notification is-danger is-light">
+                    <strong>¡Ocurrio un error inesperado!</strong><br>
+                    No se pudo eliminar la categoría, por favor intente nuevamente
+                </div>
+            ';
+        }
+    } else {
+        echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                La CATEGORIA que intenta eliminar no existe
+                No podemos eliminar la categoría ya que tiene productos asociados
             </div>
         ';
     }
-    $check_categoria=null;
+} else {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrio un error inesperado!</strong><br>
+            La CATEGORIA que intenta eliminar no existe
+        </div>
+    ';
+}
+
+mysqli_close($conexion);

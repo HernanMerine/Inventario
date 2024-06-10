@@ -1,10 +1,15 @@
 <?php
 	
-	# Conexion a la base de datos #
+	
+
 	function conexion(){
-		$pdo = new PDO('mysql:host=localhost;dbname=Inventario', 'root', '');
-		return $pdo;
-	}
+		$conn = mysqli_connect('localhost:3307', 'root', '', 'inventario');
+
+		if (!$conn) {
+			die("Connection failed: " . mysqli_connect_error());
+		}
+		return $conn;
+	}	
 
 
 	# Verificar datos #
