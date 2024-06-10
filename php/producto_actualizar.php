@@ -23,14 +23,14 @@ if (mysqli_num_rows($result_producto) <= 0) {
 mysqli_free_result($result_producto);
 
 /*== Almacenando datos ==*/
-$codigo = limpiar_cadena($_POST['producto_codigo']);
 $nombre = limpiar_cadena($_POST['producto_nombre']);
-$precio = limpiar_cadena($_POST['producto_precio']);
+$costo = limpiar_cadena($_POST['producto_costo']);
+$porcentaje = limpiar_cadena($_POST['producto_porcentaje']);
 $stock = limpiar_cadena($_POST['producto_stock']);
 $categoria = limpiar_cadena($_POST['producto_categoria']);
 
 /*== Verificando campos obligatorios ==*/
-if ($codigo == "" || $nombre == "" || $precio == "" || $stock == "" || $categoria == "") {
+if ($nombre == "" || $costo == "" || $stock == "" || $categoria == "") {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -41,15 +41,6 @@ if ($codigo == "" || $nombre == "" || $precio == "" || $stock == "" || $categori
 }
 
 /*== Verificando integridad de los datos ==*/
-if (verificar_datos("[a-zA-Z0-9- ]{1,70}", $codigo)) {
-    echo '
-        <div class="notification is-danger is-light">
-            <strong>¡Ocurrió un error inesperado!</strong><br>
-            El CÓDIGO de BARRAS no coincide con el formato solicitado
-        </div>
-    ';
-    exit();
-}
 
 if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nombre)) {
     echo '
@@ -61,7 +52,17 @@ if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nom
     exit();
 }
 
-if (verificar_datos("[0-9.]{1,25}", $precio)) {
+if (verificar_datos("[0-9.]{1,25}", $costo)) {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            El COSTO no coincide con el formato solicitado
+        </div>
+    ';
+    exit();
+}
+
+if (verificar_datos("[0-9.]{1,25}", $porcentaje)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -81,22 +82,6 @@ if (verificar_datos("[0-9]{1,25}", $stock)) {
     exit();
 }
 
-/*== Verificando codigo ==*/
-if ($codigo != $datos['producto_codigo']) {
-    $query_codigo = "SELECT producto_codigo FROM producto WHERE producto_codigo='$codigo'";
-    $result_codigo = mysqli_query($conexion, $query_codigo);
-
-    if (mysqli_num_rows($result_codigo) > 0) {
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrió un error inesperado!</strong><br>
-                El CÓDIGO de BARRAS ingresado ya se encuentra registrado, por favor elija otro
-            </div>
-        ';
-        exit();
-    }
-    mysqli_free_result($result_codigo);
-}
 
 /*== Verificando nombre ==*/
 if ($nombre != $datos['producto_nombre']) {
@@ -133,7 +118,8 @@ if ($categoria != $datos['categoria_id']) {
 }
 
 /*== Actualizando datos ==*/
-$query_update = "UPDATE producto SET producto_codigo='$codigo', producto_nombre='$nombre', producto_precio='$precio', producto_stock='$stock', categoria_id='$categoria' WHERE producto_id='$id'";
+$precio_calculado = $costo + ($costo * $porcentaje / 100);
+$query_update = "UPDATE producto SET producto_nombre='$nombre', producto_costo='$costo', producto_precio = '$precio_calculado', producto_stock='$stock', categoria_id='$categoria' WHERE producto_id='$id'";
 if (mysqli_query($conexion, $query_update)) {
     echo '
         <div class="notification is-info is-light">

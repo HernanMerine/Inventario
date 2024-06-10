@@ -38,7 +38,11 @@
 			        ';
 			    }else{
 			    	$_SESSION[$modulo_buscador]=$txt;
-			    	header("Location: index.php?vista=$modulos_url",true,303); 
+			    	echo '
+						<script type="text/javascript">
+							window.location.href = "index.php?vista=' . $modulos_url . '";
+						</script>
+					';
  					exit();  
 			    }
 			}
@@ -48,7 +52,11 @@
 		# Eliminar busqueda #
 		if(isset($_POST['eliminar_buscador'])){
 			unset($_SESSION[$modulo_buscador]);
-			header("Location: index.php?vista=$modulos_url",true,303); 
+			echo '
+            <script type="text/javascript">
+                window.location.href = "index.php?vista=' . $modulos_url . '";
+            </script>
+        ';
  			exit();
 		}
 

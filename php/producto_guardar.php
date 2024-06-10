@@ -3,14 +3,15 @@ require_once "../inc/session_start.php";
 require_once "main.php";
 
 /*== Almacenando datos ==*/
-$codigo = limpiar_cadena($_POST['producto_codigo']);
 $nombre = limpiar_cadena($_POST['producto_nombre']);
-$precio = limpiar_cadena($_POST['producto_precio']);
+$costo = limpiar_cadena($_POST['producto_costo']);
+$porcentaje = limpiar_cadena($_POST['producto_porcentaje']);
 $stock = limpiar_cadena($_POST['producto_stock']);
 $categoria = limpiar_cadena($_POST['producto_categoria']);
+$proveedor = limpiar_cadena($_POST['producto_proveedor']);
 
 /*== Verificando campos obligatorios ==*/
-if ($codigo == "" || $nombre == "" || $precio == "" || $stock == "" || $categoria == "") {
+if ($proveedor == "" || $nombre == "" || $costo == "" || $stock == "" || $categoria == "") {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -21,15 +22,8 @@ if ($codigo == "" || $nombre == "" || $precio == "" || $stock == "" || $categori
 }
 
 /*== Verificando integridad de los datos ==*/
-if (verificar_datos("[a-zA-Z0-9- ]{1,70}", $codigo)) {
-    echo '
-        <div class="notification is-danger is-light">
-            <strong>¡Ocurrió un error inesperado!</strong><br>
-            El CODIGO de BARRAS no coincide con el formato solicitado
-        </div>
-    ';
-    exit();
-}
+
+
 
 if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nombre)) {
     echo '
@@ -41,7 +35,17 @@ if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nom
     exit();
 }
 
-if (verificar_datos("[0-9.]{1,25}", $precio)) {
+if (verificar_datos("[0-9.]{1,25}", $costo)) {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            El PRECIO no coincide con el formato solicitado
+        </div>
+    ';
+    exit();
+}
+
+if (verificar_datos("[0-9.]{1,25}", $porcentaje)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -61,15 +65,17 @@ if (verificar_datos("[0-9]{1,25}", $stock)) {
     exit();
 }
 
-/*== Verificando codigo ==*/
+
+
+/*== Verificando proveedor ==*/
 $conexion = conexion();
-$query_codigo = "SELECT producto_codigo FROM producto WHERE producto_codigo='$codigo'";
-$result_codigo = mysqli_query($conexion, $query_codigo);
-if (mysqli_num_rows($result_codigo) > 0) {
+$query_proveedor = "SELECT proveedor_id FROM proveedor WHERE proveedor_id='$proveedor'";
+$result_proveedor = mysqli_query($conexion, $query_proveedor);
+if (mysqli_num_rows($result_proveedor) <= 0) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
-            El CODIGO de BARRAS ingresado ya se encuentra registrado, por favor elija otro
+            La categoría seleccionada no existe
         </div>
     ';
     exit();
@@ -177,7 +183,8 @@ if ($_FILES['producto_foto']['name'] != "" && $_FILES['producto_foto']['size'] >
 
 /*== Guardando datos ==*/
 $conexion = conexion();
-$query_guardar_producto = "INSERT INTO producto (producto_codigo, producto_nombre, producto_precio, producto_stock, producto_foto, categoria_id, usuario_id) VALUES ('$codigo', '$nombre', '$precio', '$stock', '$foto', '$categoria', '$_SESSION[id]')";
+$precio_calculado = $costo + ($costo * $porcentaje / 100);
+$query_guardar_producto = "INSERT INTO producto (producto_nombre, producto_costo, producto_precio, porcentaje, producto_stock, producto_foto, categoria_id, usuario_id, proveedor_id) VALUES ('$nombre', '$costo', '$precio_calculado', '$porcentaje', '$stock', '$foto', '$categoria', '$_SESSION[id]', '$proveedor')";
 if (mysqli_query($conexion, $query_guardar_producto)) {
     echo '
         <div class="notification is-info is-light">

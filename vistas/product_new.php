@@ -14,22 +14,41 @@
         <div class="columns">
             <div class="column">
                 <div class="control">
-                    <label>Código de barra</label>
-                    <input class="input" type="text" name="producto_codigo" pattern="[a-zA-Z0-9- ]{1,70}" maxlength="70" required>
+                    <label>Nombre</label>
+                    <input class="input" type="text" name="producto_nombre" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required>
                 </div>
             </div>
             <div class="column">
-                <div class="control">
-                    <label>Nombre</label>
-                    <input class="input" type="text" name="producto_nombre" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required>
+                <label>Proveedor</label><br>
+                <div class="select is-rounded">
+                    <select name="producto_proveedor">
+                        <option value="" selected>Seleccione una opción</option>
+                        <?php
+                            $conexion = conexion();
+
+                            $proveedor = $conexion->query("SELECT * FROM proveedor");
+                            if ($proveedor->num_rows > 0) {
+                                while ($row = $proveedor->fetch_assoc()) {
+                                    echo '<option value="' . $row['proveedor_id'] . '">' . $row['nombre'] . '</option>';
+                                }
+                            }
+                            $conexion->close();
+                        ?>
+                    </select>
                 </div>
             </div>
         </div>
         <div class="columns">
             <div class="column">
                 <div class="control">
-                    <label>Precio</label>
-                    <input class="input" type="text" name="producto_precio" pattern="[0-9.]{1,25}" maxlength="25" required>
+                    <label>Costo</label>
+                    <input class="input" type="text" name="producto_costo" pattern="[0-9.]{1,25}" maxlength="25" required>
+                </div>
+            </div>
+            <div class="column">
+                <div class="control">
+                    <label>Porcentaje de ganancia</label>
+                    <input class="input" type="text" name="producto_porcentaje" pattern="[0-9.]{1,25}" maxlength="25" required>
                 </div>
             </div>
             <div class="column">
