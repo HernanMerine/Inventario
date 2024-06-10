@@ -39,9 +39,9 @@
                 <a class="navbar-link">Proveedores</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
+                    <a href="index.php?vista=proveedor_new" class="navbar-item">Nuevo</a>
+                    <a href="index.php?vista=proveedor_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=proveedor_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
 

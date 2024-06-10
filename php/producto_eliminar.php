@@ -1,5 +1,3 @@
-producto_eliminar
-
 <?php
 require_once "main.php";
 
