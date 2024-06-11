@@ -92,9 +92,10 @@
     $email = limpiar_cadena($_POST['usuario_email']);
     $clave_1 = limpiar_cadena($_POST['usuario_clave_1']);
     $clave_2 = limpiar_cadena($_POST['usuario_clave_2']);
+    $rol = limpiar_cadena($_POST['rol']);
 
     /*== Verificando campos obligatorios del usuario ==*/
-    if ($nombre == "" || $apellido == "" || $usuario == "") {
+    if ($nombre == "" || $apellido == "" || $usuario == "" || $rol == "") {
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -208,7 +209,8 @@
               usuario_apellido='$apellido',
               usuario_usuario='$usuario',
               usuario_clave='$clave',
-              usuario_email='$email' 
+              usuario_email='$email',
+              rol='$rol'
               WHERE usuario_id='$id'";
 
     if ($conn->query($query) === TRUE) {
