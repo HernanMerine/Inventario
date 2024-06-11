@@ -8,9 +8,10 @@ $usuario = limpiar_cadena($_POST['usuario_usuario']);
 $email = limpiar_cadena($_POST['usuario_email']);
 $clave_1 = limpiar_cadena($_POST['usuario_clave_1']);
 $clave_2 = limpiar_cadena($_POST['usuario_clave_2']);
+$rol = limpiar_cadena($_POST['rol']);
 
 /*Verificando campos obligatorios */
-if ($nombre == "" || $apellido == "" || $usuario == "" || $clave_1 == "" || $clave_2 == "") {
+if ($nombre == "" || $apellido == "" || $usuario == "" || $clave_1 == "" || $clave_2 == "" || $rol == "") {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -120,11 +121,11 @@ if ($clave_1 != $clave_2) {
 
 /* Guardando datos */
 $guardar_usuario = conexion();
-$query_insert = "INSERT INTO usuario (usuario_nombre, usuario_apellido, usuario_usuario, usuario_clave, usuario_email) VALUES (?, ?, ?, ?, ?)";
+$query_insert = "INSERT INTO usuario (usuario_nombre, usuario_apellido, usuario_usuario, usuario_clave, usuario_email, rol) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($guardar_usuario, $query_insert);
 
 if ($stmt) {
-    mysqli_stmt_bind_param($stmt, "sssss", $nombre, $apellido, $usuario, $clave, $email);
+    mysqli_stmt_bind_param($stmt, "sssssi", $nombre, $apellido, $usuario, $clave, $email, $rol);
     mysqli_stmt_execute($stmt);
 
     if (mysqli_stmt_affected_rows($stmt) == 1) {

@@ -62,29 +62,32 @@
                 </div>
             </div>
         </div>
-        <br><br>
-        <p class="has-text-centered">
-            SI desea actualizar la clave de este usuario por favor llene los 2 campos. Si NO desea actualizar la clave deje los campos vacíos.
-        </p>
-        <br>
         <div class="columns">
             <div class="column">
-                <div class="control">
-                    <label>Clave</label>
-                    <input class="input" type="password" name="usuario_clave_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100">
-                </div>
-            </div>
-            <div class="column">
-                <div class="control">
-                    <label>Repetir clave</label>
-                    <input class="input" type="password" name="usuario_clave_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100">
+				<label>Rol</label><br>
+                <div class="select is-rounded">
+                    <select name="rol">
+                        <option value="" selected>Seleccione una opción</option>
+                        <?php
+                            $conexion = conexion();
+
+                            $rol = $conexion->query("SELECT * FROM rol");
+                            if ($rol->num_rows > 0) {
+                                while ($row = $rol->fetch_assoc()) {
+                                    echo '<option value="' . $row['rol_id'] . '">' . $row['nombre'] . '</option>';
+                                }
+                            }
+                            $conexion->close();
+                        ?>
+                    </select>
                 </div>
             </div>
         </div>
-        <br><br><br>
+
         <p class="has-text-centered">
             Para poder actualizar los datos de este usuario por favor ingrese su USUARIO y CLAVE con la que ha iniciado sesión
         </p>
+        <br>
         <div class="columns">
             <div class="column">
                 <div class="control">
