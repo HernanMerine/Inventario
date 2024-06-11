@@ -45,7 +45,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
         if (is_file("./img/producto/" . $rows['producto_foto'])) {
             $tabla .= '<img src="./img/producto/' . $rows['producto_foto'] . '">';
         } else {
-            $tabla .= '<img src="./img/producto.png">';
+            $tabla .= '<img src="./img/producto.jpeg">';
         }
         $tabla .= '</p>
                 </figure>
