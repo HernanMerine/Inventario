@@ -17,7 +17,7 @@
 		  	<div class="column">
 		    	<div class="control">
 					<label>Contacto</label>
-				  	<input class="input" type="text" name="contacto" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required >
+				  	<input class="input" type="text" name="contacto" pattern="[\w\s\d]{3,40}" maxlength="40" required >
 				</div>
 		  	</div>
 		</div>
