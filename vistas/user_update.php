@@ -62,6 +62,28 @@
                 </div>
             </div>
         </div>
+        <div class="columns">
+            <div class="column">
+				<label>Rol</label><br>
+                <div class="select is-rounded">
+                    <select name="rol">
+                        <option value="" selected>Seleccione una opción</option>
+                        <?php
+                            $conexion = conexion();
+
+                            $rol = $conexion->query("SELECT * FROM rol");
+                            if ($rol->num_rows > 0) {
+                                while ($row = $rol->fetch_assoc()) {
+                                    echo '<option value="' . $row['rol_id'] . '">' . $row['nombre'] . '</option>';
+                                }
+                            }
+                            $conexion->close();
+                        ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <br><br>
         <p class="has-text-centered">
             SI desea actualizar la clave de este usuario por favor llene los 2 campos. Si NO desea actualizar la clave deje los campos vacíos.

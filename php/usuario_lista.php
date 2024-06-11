@@ -5,13 +5,15 @@
     // Establecer la conexión a la base de datos
     $conexion = conexion();
 
+    $campos = "usuario.usuario_id, usuario.usuario_nombre, usuario.usuario_apellido, usuario.usuario_usuario, usuario.usuario_email, rol.nombre";
+
     if (isset($busqueda) && $busqueda != "") {
         $busqueda = $conexion->real_escape_string($busqueda);
-        $consulta_datos = "SELECT * FROM usuario WHERE ((usuario_id != '" . $_SESSION['id'] . "') AND (usuario_nombre LIKE '%$busqueda%' OR usuario_apellido LIKE '%$busqueda%' OR usuario_usuario LIKE '%$busqueda%' OR usuario_email LIKE '%$busqueda%')) ORDER BY usuario_nombre ASC LIMIT $inicio, $registros";
+        $consulta_datos = "SELECT $campos FROM usuario INNER JOIN rol on usuario.rol = rol.rol_id WHERE ((usuario_id != '" . $_SESSION['id'] . "') AND (usuario_nombre LIKE '%$busqueda%' OR usuario_apellido LIKE '%$busqueda%' OR usuario_usuario LIKE '%$busqueda%' OR usuario_email LIKE '%$busqueda%')) ORDER BY usuario_nombre ASC LIMIT $inicio, $registros";
 
         $consulta_total = "SELECT COUNT(usuario_id) FROM usuario WHERE ((usuario_id != '" . $_SESSION['id'] . "') AND (usuario_nombre LIKE '%$busqueda%' OR usuario_apellido LIKE '%$busqueda%' OR usuario_usuario LIKE '%$busqueda%' OR usuario_email LIKE '%$busqueda%'))";
     } else {
-        $consulta_datos = "SELECT * FROM usuario WHERE usuario_id != '" . $_SESSION['id'] . "' ORDER BY usuario_nombre ASC LIMIT $inicio, $registros";
+        $consulta_datos = "SELECT $campos FROM usuario INNER JOIN rol on usuario.rol = rol.rol_id WHERE usuario_id != '" . $_SESSION['id'] . "' ORDER BY usuario_nombre ASC LIMIT $inicio, $registros";
 
         $consulta_total = "SELECT COUNT(usuario_id) FROM usuario WHERE usuario_id != '" . $_SESSION['id'] . "'";
     }
@@ -33,6 +35,7 @@
                                     <th>Apellidos</th>
                                     <th>Usuario</th>
                                     <th>Email</th>
+                                    <th>Rol</th>
                                     <th colspan="2">Opciones</th>
                                 </tr>
                             </thead>
@@ -49,6 +52,7 @@
                                 <td>' . $row['usuario_apellido'] . '</td>
                                 <td>' . $row['usuario_usuario'] . '</td>
                                 <td>' . $row['usuario_email'] . '</td>
+                                <td>' . $row['nombre'] . '</td>
                                 <td><a href="index.php?vista=user_update&user_id_up=' . $row['usuario_id'] . '" class="button is-success is-rounded is-small">Actualizar</a></td>
                                 <td><a href="' . $url . $pagina . '&user_id_del=' . $row['usuario_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a></td>
                             </tr>';
