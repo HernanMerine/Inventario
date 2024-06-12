@@ -225,7 +225,11 @@ td:not([align]),th:not([align]) {
 }
 
 html {
-    background-color: #fff;
+    background-image: url('./../img/opcion2.png'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #cdcdcd;
     font-size: 16px;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -237,6 +241,7 @@ html {
     -moz-text-size-adjust: 100%;
     text-size-adjust: 100%
 }
+
 
 article,aside,figure,footer,header,hgroup,section {
     display: block
@@ -254,7 +259,8 @@ code,pre {
 
 body {
     color: #4a4a4a;
-    font-size: 1em;
+    
+        font-size: 120%;
     font-weight: 400;
     line-height: 1.5
 }
@@ -335,7 +341,7 @@ pre code {
 }
 
 table td,table th {
-    vertical-align: top
+    vertical-align: middle
 }
 
 table td:not([align]),table th:not([align]) {
@@ -367,7 +373,7 @@ table th {
 }
 
 .box {
-    background-color: #fff;
+    background-color: #dddddd;
     border-radius: 6px;
     box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
     color: #4a4a4a;
@@ -395,7 +401,8 @@ a.box:active {
     padding-right: 1em;
     padding-top: calc(.5em - 1px);
     text-align: center;
-    white-space: nowrap
+    white-space: nowrap;
+    font-size: 110%;
 }
 
 .button strong {
@@ -1599,7 +1606,7 @@ a.box:active {
 }
 
 .button.is-small {
-    font-size: .75rem
+    font-size: .95rem
 }
 
 .button.is-small:not(.is-rounded) {
@@ -1607,7 +1614,7 @@ a.box:active {
 }
 
 .button.is-normal {
-    font-size: 1rem
+    font-size: 1.2rem
 }
 
 .button.is-medium {
@@ -1746,10 +1753,12 @@ a.box:active {
 }
 
 .container {
+    background-color:#ffffff7c;
     flex-grow: 1;
     margin: 0 auto;
     position: relative;
-    width: auto
+    width: auto;
+    overflow-x: hidden;
 }
 
 .container.is-fluid {
@@ -1935,7 +1944,7 @@ a.box:active {
 }
 
 .content table td,.content table th {
-    border: 1px solid #dbdbdb;
+    border: 1px solid #ffffff;
     border-width: 0 0 1px;
     padding: .5em .75em;
     vertical-align: top
@@ -2520,15 +2529,15 @@ div.icon-text {
 }
 
 .table td,.table th {
-    border: 1px solid #dbdbdb;
+    border: 1px solid #858080;
     border-width: 0 0 1px;
     padding: .5em .75em;
-    vertical-align: top
+    vertical-align: middle;
 }
 
 .table td.is-white,.table th.is-white {
-    background-color: #fff;
-    border-color: #fff;
+    background-color: #dddddd;
+    border-color: #dddddd;
     color: #0a0a0a
 }
 
@@ -2627,7 +2636,7 @@ div.icon-text {
 }
 
 .table thead {
-    background-color: transparent
+    background-color: #adadad;
 }
 
 .table thead td,.table thead th {
@@ -2688,6 +2697,7 @@ div.icon-text {
     -webkit-overflow-scrolling: touch;
     overflow: auto;
     overflow-y: hidden;
+    overflow-x: hidden;
     max-width: 100%
 }
 
@@ -4228,7 +4238,7 @@ a.tag:hover {
 .control {
     box-sizing: border-box;
     clear: both;
-    font-size: 1rem;
+    font-size: 1.3rem;
     position: relative;
     text-align: inherit
 }
@@ -5091,7 +5101,7 @@ a.dropdown-item.is-active,button.dropdown-item.is-active {
 
 .navbar {
     background-color: #fff;
-    min-height: 3.25rem;
+    min-height: 5rem;
     position: relative;
     z-index: 30
 }
@@ -5705,7 +5715,7 @@ body.has-navbar-fixed-bottom,html.has-navbar-fixed-bottom {
 }
 
 .navbar-item img {
-    max-height: 1.75rem
+    max-height: max-content
 }
 
 .navbar-item.has-dropdown {
@@ -5836,7 +5846,7 @@ body.has-navbar-fixed-bottom,html.has-navbar-fixed-bottom {
     }
 
     .navbar {
-        min-height: 3.25rem
+        min-height: 5rem
     }
 
     .navbar.is-spaced {
@@ -6071,7 +6081,7 @@ body.has-navbar-fixed-bottom,html.has-navbar-fixed-bottom {
 }
 
 .pagination-ellipsis,.pagination-link,.pagination-next,.pagination-previous {
-    font-size: 1em;
+    font-size: 1.2em;
     justify-content: center;
     margin: .25rem;
     padding-left: .5em;
@@ -6099,11 +6109,11 @@ body.has-navbar-fixed-bottom,html.has-navbar-fixed-bottom {
 }
 
 .pagination-link[disabled],.pagination-next[disabled],.pagination-previous[disabled] {
-    background-color: #dbdbdb;
+    background-color: #636fa7;
     border-color: #dbdbdb;
     box-shadow: none;
-    color: #7a7a7a;
-    opacity: .5
+    color: #c9c9c9;
+    opacity: .8;
 }
 
 .pagination-next,.pagination-previous {

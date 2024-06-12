@@ -3,7 +3,7 @@
     <h2 class="subtitle">Actualizar proveedor</h2>
 </div>
 
-<div class="container pb-6 pt-6">
+<div class="container pb-6 pt-6 pl-5 pr-5">
     <?php
         include "./inc/btn_back.php";
 

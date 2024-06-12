@@ -16,7 +16,7 @@
     <?php } ?>
 </div>
 
-<div class="container pb-6 pt-6">
+<div class="container pb-6 pt-6 pl-5 pr-5">
     <?php
         include "./inc/btn_back.php";
 

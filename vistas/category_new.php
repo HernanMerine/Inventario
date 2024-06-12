@@ -3,7 +3,7 @@
 	<h2 class="subtitle">Nueva categoría</h2>
 </div>
 
-<div class="container pb-6 pt-6">
+<div class="container pb-6 pt-6 pl-5 pr-5">
 
 	<div class="form-rest mb-6 mt-6"></div>
 

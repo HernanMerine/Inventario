@@ -31,27 +31,38 @@ $Npaginas = ceil($total / $registros);
 if ($total >= 1 && $pagina <= $Npaginas) {
     $contador = $inicio + 1;
     $pag_inicio = $inicio + 1;
-    foreach ($datos as $rows) {
-        $tabla .= '
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                      <p>
-                        <strong>' . $contador . ' - ' . $rows['nombre'] . '</strong><br>
-                        <strong>CONTACTO:</strong> ' . $rows['contacto'] . '
-                      </p>
-                    </div>
-                    <div class="has-text-right">
-                        <a href="index.php?vista=proveedor_update&proveedor_id_up=' . $rows['proveedor_id'] . '" class="button is-success is-rounded is-small">Actualizar</a>
-                        <a href="' . $url . $pagina . '&proveedor_id_del=' . $rows['proveedor_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
-                    </div>
-                </div>
-            </article>
-            <hr>
-        ';
+    
+    $tabla .= '<div class="table-container">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-narrow">
+             <thead>
+                 <tr class="has-text-centered">
+                     <th>ID</th>
+                     <th>Nombre</th>
+                     <th>Mail</th>
+                     <th>Contacto</th>
+                     <th>Vendedor</th>
+                     <th>Direccion</th>
+                     <th colspan="2">Opciones</th>
+                 </tr>
+             </thead>
+             <tbody>';
+    
+    foreach ($datos as $row) {
+        $tabla .= '<tr class="has-text-centered">
+             <td>'. $row['proveedor_id'] .'</td>
+             <td>' . $row['nombre'] . '</td>
+             <td>' ."". '</td>
+             <td>' . $row['contacto'] . '</td>
+             <td>' ."". '</td>
+             <td>' ."". '</td>
+             <td> <a href="index.php?vista=proveedor_update&proveedor_id_up=' . $row['proveedor_id'] . '" class="button is-success is-rounded is-small">Actualizar</a></td>
+             <td><a href="' . $url . $pagina . '&proveedor_id_del=' . $row['proveedor_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
+        </td>
+         </tr>';
         $contador++;
     }
     $pag_final = $contador - 1;
+    
 } else {
     if ($total >= 1) {
         $tabla .= '
@@ -68,14 +79,13 @@ if ($total >= 1 && $pagina <= $Npaginas) {
     }
 }
 
-if ($total > 0 && $pagina <= $Npaginas) {
-    $tabla .= '<p class="has-text-right">Mostrando proveedores <strong>' . $pag_inicio . '</strong> al <strong>' . $pag_final . '</strong> de un <strong>total de ' . $total . '</strong></p>';
-}
-
 $conexion->close();
 echo $tabla;
 
-if ($total >= 1 && $pagina <= $Npaginas) {
+if ($total > 0 && $pagina <= $Npaginas) {
+    echo '</tbody></table>'; // Cierre de la tabla
+    echo '<p class="has-text-right">Mostrando proveedores <strong>' . $pag_inicio . '</strong> al <strong>' . $pag_final . '</strong> de un <strong>total de ' . $total . '</strong></p>';
     echo paginador_tablas($pagina, $Npaginas, $url, 7);
 }
 ob_end_flush();
+?>

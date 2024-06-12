@@ -3,7 +3,7 @@
 	<h2 class="subtitle">Buscar producto</h2>
 </div>
 
-<div class="container pb-6 pt-6">
+<div class="container pb-6 pt-6 pl-5 pr-5">
     <?php
         require_once "./php/main.php";
 

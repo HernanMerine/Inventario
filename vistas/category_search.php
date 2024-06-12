@@ -3,7 +3,7 @@
     <h2 class="subtitle">Buscar categoría</h2>
 </div>
 
-<div class="container pb-6 pt-6">
+<div class="container pb-6 pt-6 pl-5 pr-5">
     <?php
         require_once "./php/main.php";
 
@@ -31,13 +31,13 @@
     <?php }else{ ?>
     <div class="columns">
         <div class="column">
-            <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="categoria"> 
-                <input type="hidden" name="eliminar_buscador" value="categoria">
-                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_categoria']; ?>”</strong></p>
-                <br>
-                <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>
-            </form>
+        <form class="has-text-centered" action="" method="POST" autocomplete="off">
+    <input type="hidden" name="modulo_buscador" value="categoria"> 
+    <input type="hidden" name="eliminar_buscador" value="categoria">
+    <p class="is-size-3">Estás buscando <strong>“<?php echo $_SESSION['busqueda_categoria']; ?>”</strong></p>
+    <br>
+    <button type="submit" class="button is-danger is-rounded">Eliminar búsqueda</button>
+</form>
         </div>
     </div>
 

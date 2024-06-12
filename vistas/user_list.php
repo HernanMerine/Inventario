@@ -3,8 +3,8 @@
     <h2 class="subtitle">Lista de usuarios</h2>
 </div>
 
-<div class="container pb-6 pt-6">  
-    <?php
+<div class="container pb-6 pt-6 pl-5 pr-5">
+<?php
         require_once "./php/main.php";
 
         # Eliminar usuario #
