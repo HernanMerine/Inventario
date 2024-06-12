@@ -6,6 +6,10 @@
     // Obteniendo la conexión a la base de datos
     $conexion = conexion();
 
+    if ($conexion->connect_error) {
+        die("Connection failed: " . $conexion->connect_error);
+    }
+
     /*== Verificando usuario ==*/
     $check_usuario = $conexion->query("SELECT usuario_id FROM usuario WHERE usuario_id='$user_id_del'");
     
@@ -52,4 +56,3 @@
     }
     $check_usuario->close();
     $conexion->close();
-?>
