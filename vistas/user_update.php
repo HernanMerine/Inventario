@@ -27,86 +27,151 @@
 
         if ($check_usuario->num_rows > 0) {
             $datos = $check_usuario->fetch_assoc();
+
+            // Obtener el rol actual del usuario
+            $rol_usuario = $datos['rol']; // Suponiendo que 'rol' es el campo en la tabla 'usuario' que almacena el 'rol_id'
+
+            // Verificar si el usuario es ADMINISTRADOR
+            $es_administrador = ($rol_usuario == 1); // Reemplaza 'ID_DEL_ROL_ADMINISTRADOR' por el valor real del rol de ADMINISTRADOR
+
+            /*== Si NO es ADMINISTRADOR, mostrar el selector de roles ==*/
+            if ($es_administrador) {
     ?>
+                <form action="./php/usuario_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off">
+                    <input type="hidden" name="usuario_id" value="<?php echo $datos['usuario_id']; ?>" required>
+                    
+                    <div class="columns">
+                        <div class="column">
+                            <div class="control">
+                                <label>Nombres</label>
+                                <input class="input" type="text" name="usuario_nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required value="<?php echo $datos['usuario_nombre']; ?>">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control">
+                                <label>Apellidos</label>
+                                <input class="input" type="text" name="usuario_apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required value="<?php echo $datos['usuario_apellido']; ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="control">
+                                <label>Usuario</label>
+                                <input class="input" type="text" name="usuario_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required value="<?php echo $datos['usuario_usuario']; ?>">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control">
+                                <label>Email</label>
+                                <input class="input" type="email" name="usuario_email" maxlength="70" value="<?php echo $datos['usuario_email']; ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <label>Rol</label><br>
+                            <div class="select is-rounded">
+                                <select name="rol">
+                                    <option value="" selected>Seleccione una opción</option>
+                                    <?php
+                                        $roles = $conexion->query("SELECT * FROM rol");
+                                        if ($roles->num_rows > 0) {
+                                            while ($row = $roles->fetch_assoc()) {
+                                                $selected = ($row['rol_id'] == $rol_usuario) ? 'selected' : '';
+                                                echo '<option value="' . $row['rol_id'] . '" ' . $selected . '>' . $row['nombre'] . '</option>';
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="form-rest mb-6 mt-6"></div>
+                    <p class="has-text-centered">
+                        Para poder actualizar los datos de este usuario por favor ingrese su USUARIO y CLAVE con la que ha iniciado sesión
+                    </p>
+                    <br>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="control">
+                                <label>Usuario</label>
+                                <input class="input" type="text" name="administrador_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control">
+                                <label>Clave</label>
+                                <input class="input" type="password" name="administrador_clave" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="has-text-centered">
+                        <button type="submit" class="button is-success is-rounded">Actualizar</button>
+                    </p>
+                </form>
+    <?php
+            } else {
+                /*== Si ono es ADMINISTRADOR, no mostrar el selector de roles ==*/
+    ?>
+                <form action="./php/usuario_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off">
+                    <input type="hidden" name="usuario_id" value="<?php echo $datos['usuario_id']; ?>" required>
+                    <input type="hidden" name="rol" value="<?php echo $rol_usuario; ?>">
+                    
+                    <!-- Resto del formulario -->
+                    <div class="columns">
+                        <div class="column">
+                            <div class="control">
+                                <label>Nombres</label>
+                                <input class="input" type="text" name="usuario_nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required value="<?php echo $datos['usuario_nombre']; ?>">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control">
+                                <label>Apellidos</label>
+                                <input class="input" type="text" name="usuario_apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required value="<?php echo $datos['usuario_apellido']; ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="control">
+                                <label>Usuario</label>
+                                <input class="input" type="text" name="usuario_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required value="<?php echo $datos['usuario_usuario']; ?>">
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control">
+                                <label>Email</label>
+                                <input class="input" type="email" name="usuario_email" maxlength="70" value="<?php echo $datos['usuario_email']; ?>">
+                            </div>
+                        </div>
+                    </div>
 
-    <form action="./php/usuario_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off">
-        <input type="hidden" name="usuario_id" value="<?php echo $datos['usuario_id']; ?>" required>
-        
-        <div class="columns">
-            <div class="column">
-                <div class="control">
-                    <label>Nombres</label>
-                    <input class="input" type="text" name="usuario_nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required value="<?php echo $datos['usuario_nombre']; ?>">
-                </div>
-            </div>
-            <div class="column">
-                <div class="control">
-                    <label>Apellidos</label>
-                    <input class="input" type="text" name="usuario_apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required value="<?php echo $datos['usuario_apellido']; ?>">
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column">
-                <div class="control">
-                    <label>Usuario</label>
-                    <input class="input" type="text" name="usuario_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required value="<?php echo $datos['usuario_usuario']; ?>">
-                </div>
-            </div>
-            <div class="column">
-                <div class="control">
-                    <label>Email</label>
-                    <input class="input" type="email" name="usuario_email" maxlength="70" value="<?php echo $datos['usuario_email']; ?>">
-                </div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column">
-				<label>Rol</label><br>
-                <div class="select is-rounded">
-                    <select name="rol">
-                        <option value="" selected>Seleccione una opción</option>
-                        <?php
-                            $conexion = conexion();
-
-                            $rol = $conexion->query("SELECT * FROM rol");
-                            if ($rol->num_rows > 0) {
-                                while ($row = $rol->fetch_assoc()) {
-                                    echo '<option value="' . $row['rol_id'] . '">' . $row['nombre'] . '</option>';
-                                }
-                            }
-                            $conexion->close();
-                        ?>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <p class="has-text-centered">
-            Para poder actualizar los datos de este usuario por favor ingrese su USUARIO y CLAVE con la que ha iniciado sesión
-        </p>
-        <br>
-        <div class="columns">
-            <div class="column">
-                <div class="control">
-                    <label>Usuario</label>
-                    <input class="input" type="text" name="administrador_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required>
-                </div>
-            </div>
-            <div class="column">
-                <div class="control">
-                    <label>Clave</label>
-                    <input class="input" type="password" name="administrador_clave" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
-                </div>
-            </div>
-        </div>
-        <p class="has-text-centered">
-            <button type="submit" class="button is-success is-rounded">Actualizar</button>
-        </p>
-    </form>
+                    <p class="has-text-centered">
+                        Para poder actualizar los datos de este usuario por favor ingrese su USUARIO y CLAVE con la que ha iniciado sesión
+                    </p>
+                    <br>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="control">
+                                <label>Usuario</label>
+                                <input class="input" type="text" name="administrador_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="control">
+                                <label>Clave</label>
+                                <input class="input" type="password" name="administrador_clave" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="has-text-centered">
+                        <button type="submit" class="button is-success is-rounded">Actualizar</button>
+                    </p>
+                </form>
     <?php 
+            }
         } else {
             include "./inc/error_alert.php";
         }
