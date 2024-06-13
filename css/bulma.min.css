@@ -1759,6 +1759,7 @@ a.box:active {
     position: relative;
     width: auto;
     overflow-x: hidden;
+    overflow-y:hidden;
 }
 
 .container.is-fluid {
@@ -1792,9 +1793,10 @@ a.box:active {
     }
 }
 
+
 @media screen and (min-width: 1408px) {
     .container:not(.is-max-desktop):not(.is-max-widescreen) {
-        max-width:1344px
+        max-width: 1500px;
     }
 }
 
@@ -11246,8 +11248,8 @@ a.has-text-danger-dark:focus,a.has-text-danger-dark:hover {
 }
 
 .hero.is-info {
-    background-color: #3e8ed0;
-    color: #fff
+    background-color: transparent;
+    color: #242424
 }
 
 .hero.is-info a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),.hero.is-info strong {
