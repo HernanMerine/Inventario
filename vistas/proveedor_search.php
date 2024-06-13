@@ -8,7 +8,7 @@
         require_once "./php/main.php";
 
         if(isset($_POST['modulo_buscador'])){
-            require_once "./php/buscador.php";
+            require_once "./php/buscador.php"; // Cambiar a buscador_proveedor.php
         }
 
         if(!isset($_SESSION['busqueda_proveedor']) && empty($_SESSION['busqueda_proveedor'])){
@@ -36,14 +36,14 @@
                 <input type="hidden" name="eliminar_buscador" value="proveedor">
                 <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_proveedor']; ?>”</strong></p>
                 <br>
-                <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>
+                <button type="submit" class="button is-danger is-rounded">Eliminar búsqueda</button>
             </form>
         </div>
     </div>
     <?php
             # Eliminar proveedor #
             if(isset($_GET['proveedor_id_del'])){
-                require_once "./php/proveedor_eliminar.php";
+                require_once "./php/proveedor_eliminar.php"; // Cambiar a proveedor_eliminar.php
             }
 
             if(!isset($_GET['page'])){
@@ -56,12 +56,12 @@
             }
 
             $pagina=limpiar_cadena($pagina);
-            $url="index.php?vista=proveedor_search&page="; /* <== */
+            $url="index.php?vista=proveedor_search&page="; /* <== Cambiar a proveedor_search */
             $registros=15;
-            $busqueda=$_SESSION['busqueda_proveedor']; /* <== */
+            $busqueda=$_SESSION['busqueda_proveedor']; /* <== Cambiar a busqueda_proveedor */
 
-            # Paginador usuario #
-            require_once "./php/proveedor_lista.php";
+            # Paginador proveedor #
+            require_once "./php/proveedor_lista.php"; // Cambiar a proveedor_lista.php
         } 
     ?>
 </div>

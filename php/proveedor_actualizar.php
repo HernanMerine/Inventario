@@ -1,15 +1,16 @@
 <?php
+require_once "../inc/session_start.php";
 require_once "main.php";
 
 /*== Almacenando id ==*/
 $id = limpiar_cadena($_POST['proveedor_id']);
 
 /*== Verificando proveedor ==*/
-$conexion = conexion();
-$query_proveedor = "SELECT * FROM proveedor WHERE proveedor_id='$id'";
-$result_proveedor = mysqli_query($conexion, $query_proveedor);
+$conn = conexion();
+$query = "SELECT * FROM proveedor WHERE proveedor_id='$id'";
+$check_proveedor = $conn->query($query);
 
-if (mysqli_num_rows($result_proveedor) <= 0) {
+if ($check_proveedor->num_rows <= 0) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -18,28 +19,92 @@ if (mysqli_num_rows($result_proveedor) <= 0) {
     ';
     exit();
 } else {
-    $datos = mysqli_fetch_assoc($result_proveedor);
+    $datos = $check_proveedor->fetch_assoc();
 }
-mysqli_free_result($result_proveedor);
 
-/*== Almacenando datos ==*/
-$nombre = limpiar_cadena($_POST['nombre']);
-$contacto = limpiar_cadena($_POST['contacto']);
+/*== Almacenando datos del administrador ==*/
+$admin_usuario = limpiar_cadena($_POST['administrador_usuario']);
+$admin_clave = limpiar_cadena($_POST['administrador_clave']);
 
-/*== Verificando campos obligatorios ==*/
-if ($nombre == "" || $contacto == "") {
+/*== Verificando campos obligatorios del administrador ==*/
+if ($admin_usuario == "" || $admin_clave == "") {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
-            No has llenado todos los campos que son obligatorios
+            No ha llenado los campos que corresponden a su USUARIO o CLAVE
         </div>
     ';
     exit();
 }
 
-/*== Verificando integridad de los datos ==*/
+/*== Verificando integridad de los datos (admin) ==*/
+if (verificar_datos("[a-zA-Z0-9]{4,20}", $admin_usuario)) {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            Su USUARIO no coincide con el formato solicitado
+        </div>
+    ';
+    exit();
+}
 
-if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nombre)) {
+if (verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $admin_clave)) {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            Su CLAVE no coincide con el formato solicitado
+        </div>
+    ';
+    exit();
+}
+
+/*== Verificando el administrador en DB ==*/
+$query = "SELECT usuario_usuario, usuario_clave FROM usuario WHERE usuario_usuario='$admin_usuario' AND usuario_id='".$_SESSION['id']."'";
+$check_admin = $conn->query($query);
+
+if ($check_admin->num_rows == 1) {
+    $check_admin = $check_admin->fetch_assoc();
+
+    if ($check_admin['usuario_usuario'] != $admin_usuario || !password_verify($admin_clave, $check_admin['usuario_clave'])) {
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrió un error inesperado!</strong><br>
+                USUARIO o CLAVE de administrador incorrectos
+            </div>
+        ';
+        exit();
+    }
+
+} else {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            USUARIO o CLAVE de administrador incorrectos
+        </div>
+    ';
+    exit();
+}
+
+/*== Almacenando datos del proveedor ==*/
+$nombre = limpiar_cadena($_POST['proveedor_nombre']);
+$email = limpiar_cadena($_POST['proveedor_mail']);
+$telefono = limpiar_cadena($_POST['proveedor_telefono']);
+$vendedor = limpiar_cadena($_POST['proveedor_vendedor']);
+$direccion = limpiar_cadena($_POST['proveedor_direccion']);
+
+/*== Verificando campos obligatorios del proveedor ==*/
+if ($nombre == "" || $telefono == "") {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            No ha llenado todos los campos que son obligatorios
+        </div>
+    ';
+    exit();
+}
+
+/*== Verificando integridad de los datos (proveedor) ==*/
+if (verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}", $nombre)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -49,36 +114,36 @@ if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nom
     exit();
 }
 
-if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,100}", $contacto)) {
+if ($email != "" && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
-            El CONTACTO no coincide con el formato solicitado
+            El CORREO ingresado no es válido
         </div>
     ';
     exit();
 }
 
-/*== Verificando nombre ==*/
-if ($nombre != $datos['nombre']) {
-    $query_nombre = "SELECT nombre FROM proveedor WHERE nombre='$nombre'";
-    $result_nombre = mysqli_query($conexion, $query_nombre);
-
-    if (mysqli_num_rows($result_nombre) > 0) {
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrió un error inesperado!</strong><br>
-                El NOMBRE ingresado ya se encuentra registrado, por favor elija otro
-            </div>
-        ';
-        exit();
-    }
-    mysqli_free_result($result_nombre);
+if (verificar_datos("[0-9]{7,20}", $telefono)) {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            El TELÉFONO no coincide con el formato solicitado
+        </div>
+    ';
+    exit();
 }
 
-/*== Actualizando datos ==*/
-$query_update = "UPDATE proveedor SET nombre='$nombre', contacto='$contacto' WHERE proveedor_id='$id'";
-if (mysqli_query($conexion, $query_update)) {
+/*== Actualizar datos ==*/
+$query = "UPDATE proveedor SET 
+          proveedor_nombre='$nombre',
+          proveedor_mail='$email',
+          proveedor_telefono='$telefono',
+          proveedor_vendedor='$vendedor',
+          proveedor_direccion='$direccion'
+          WHERE proveedor_id='$id'";
+
+if ($conn->query($query) === TRUE) {
     echo '
         <div class="notification is-info is-light">
             <strong>¡PROVEEDOR ACTUALIZADO!</strong><br>
@@ -89,9 +154,9 @@ if (mysqli_query($conexion, $query_update)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
-            No se pudo actualizar el proveedor, por favor intente nuevamente
+            No se pudo actualizar el proveedor, por favor inténtelo nuevamente
         </div>
     ';
 }
 
-mysqli_close($conexion);
+$conn->close();
