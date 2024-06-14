@@ -1,80 +1,78 @@
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-
     <div class="navbar-brand">
         <a class="navbar-item" href="index.php?vista=home">
-        <img src="./img/cosito.png" width="150" height="110">
+            <img src="./img/cosito.png" width="150" height="110">
         </a>
-
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
         </a>
     </div>
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">Usuarios</a>
-
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
+            <?php if ($_SESSION['rol_nombre'] == 'ADMINISTRADOR') { ?>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Usuarios</a>
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
+                        <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">Clientes</a>
-
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=client_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=client_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=client_search" class="navbar-item">Buscar</a>
+            <?php if ($_SESSION['rol_nombre'] == 'ADMINISTRADOR' || $_SESSION['rol_nombre'] == 'VENDEDOR') { ?>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Clientes</a>
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=client_new" class="navbar-item">Nuevo</a>
+                        <a href="index.php?vista=client_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=client_search" class="navbar-item">Buscar</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">Órdenes de compra</a>
-
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=order_new" class="navbar-item">Crear Orden</a>
-                    <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Órdenes de compra</a>
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=order_new" class="navbar-item">Crear Orden</a>
+                        <a href="index.php?vista=order_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=order_search" class="navbar-item">Buscar</a>
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">Proveedores</a>
-
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=proveedor_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=proveedor_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=proveedor_search" class="navbar-item">Buscar</a>
+            <?php if ($_SESSION['rol_nombre'] == 'ADMINISTRADOR') { ?>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Proveedores</a>
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=proveedor_new" class="navbar-item">Nuevo</a>
+                        <a href="index.php?vista=proveedor_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=proveedor_search" class="navbar-item">Buscar</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">Categorías</a>
-
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=category_new" class="navbar-item">Nueva</a>
-                    <a href="index.php?vista=category_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=category_search" class="navbar-item">Buscar</a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Categorías</a>
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=category_new" class="navbar-item">Nueva</a>
+                        <a href="index.php?vista=category_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=category_search" class="navbar-item">Buscar</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">Productos</a>
-
-                <div class="navbar-dropdown">
-                    <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=product_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=product_category" class="navbar-item">Por categoría</a>
-                    <a href="index.php?vista=product_search" class="navbar-item">Buscar</a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Productos</a>
+                    <div class="navbar-dropdown">
+                        <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
+                        <a href="index.php?vista=product_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=product_category" class="navbar-item">Por categoría</a>
+                        <a href="index.php?vista=product_search" class="navbar-item">Buscar</a>
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
 
         </div>
 
@@ -84,7 +82,6 @@
                     <a href="index.php?vista=user_update&user_id_up=<?php echo $_SESSION['id']; ?>" class="button is-primary is-rounded">
                         Mi cuenta
                     </a>
-
                     <a href="index.php?vista=logout" class="button is-link is-rounded">
                         Salir
                     </a>

@@ -95,7 +95,7 @@
     $rol = limpiar_cadena($_POST['rol']);
 
     /*== Verificando campos obligatorios del usuario ==*/
-    if ($nombre == "" || $apellido == "" || $usuario == "" || $rol == "") {
+    if ($nombre == "" || $apellido == "" || $usuario == "") {
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>

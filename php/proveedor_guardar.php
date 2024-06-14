@@ -3,11 +3,14 @@ require_once "../inc/session_start.php";
 require_once "main.php";
 
 /*== Almacenando datos ==*/
-$nombre = limpiar_cadena($_POST['nombre']);
-$contacto = limpiar_cadena($_POST['contacto']);
+$nombre = limpiar_cadena($_POST['proveedor_nombre']);
+$email = limpiar_cadena($_POST['proveedor_mail']);
+$telefono = limpiar_cadena($_POST['proveedor_telefono']);
+$vendedor = limpiar_cadena($_POST['proveedor_vendedor']);
+$direccion = limpiar_cadena($_POST['proveedor_direccion']);
 
 /*== Verificando campos obligatorios ==*/
-if ($nombre == "" || $contacto == "") {
+if ($nombre == "" || $telefono == "") {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -18,7 +21,7 @@ if ($nombre == "" || $contacto == "") {
 }
 
 /*== Verificando integridad de los datos ==*/
-if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nombre)) {
+if (verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nombre)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -28,19 +31,29 @@ if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}", $nom
     exit();
 }
 
-if (verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,100}", $contacto)) {
+if ($email != "" && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
-            El CONTACTO no coincide con el formato solicitado
+            El CORREO ingresado no es válido
         </div>
     ';
     exit();
 }
 
-/*== Verificando nombre ==*/
+if (verificar_datos("[0-9]{7,20}", $telefono)) {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            El TELÉFONO no coincide con el formato solicitado
+        </div>
+    ';
+    exit();
+}
+
+/*== Verificando nombre único ==*/
 $conexion = conexion();
-$query_nombre = "SELECT nombre FROM proveedor WHERE nombre='$nombre'";
+$query_nombre = "SELECT proveedor_nombre FROM proveedor WHERE proveedor_nombre='$nombre'";
 $result_nombre = mysqli_query($conexion, $query_nombre);
 if (mysqli_num_rows($result_nombre) > 0) {
     echo '
@@ -53,7 +66,7 @@ if (mysqli_num_rows($result_nombre) > 0) {
 }
 
 /*== Guardando datos ==*/
-$query_guardar_proveedor = "INSERT INTO proveedor (nombre, contacto) VALUES ('$nombre', '$contacto')";
+$query_guardar_proveedor = "INSERT INTO proveedor (proveedor_nombre, proveedor_mail, proveedor_telefono, proveedor_vendedor, proveedor_direccion) VALUES ('$nombre', '$email', '$telefono', '$vendedor', '$direccion')";
 if (mysqli_query($conexion, $query_guardar_proveedor)) {
     echo '
         <div class="notification is-info is-light">

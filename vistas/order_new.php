@@ -1,4 +1,7 @@
 <?php
+require_once "./php/detalle_orden.php";
+require_once "./php/envio_mail.php";
+
 // Iniciar la sesión si no está iniciada
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -112,7 +115,7 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                 <?php
                                 $totalOrden = 0;
 
-                                // Almacena los productos agregados
+                                // Almacenar productos 
                                 if (!isset($_SESSION['productosOrden'])) {
                                     $_SESSION['productosOrden'] = array();
                                 }
@@ -124,7 +127,7 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                         $units = intval($_POST['units']);
                                         $pricePerUnit = floatval($_POST['price_per_unit']);
 
-                                        // Subtotal para este producto
+                                        // Subtotal 
                                         $subtotal = $units * $pricePerUnit;
 
                                         $_SESSION['productosOrden'][] = array(
@@ -176,7 +179,7 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
 
                                                     $query_insert_detalle = "INSERT INTO detalle_orden_de_compra (orden_id, producto_id, cantidad) VALUES ($orden_id, $producto_id, $cantidad)";
                                                     $result_insert_detalle = $conexion->query($query_insert_detalle);
-
+                                                    }
                                                     // Verificar si la inserción en detalle_orden_de_compra fue exitosa
                                                     if (!$result_insert_detalle) {
                                                         echo '<div class="container mt-6">
@@ -187,13 +190,18 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                                             </div>';
                                                         exit; // Salir del script o manejar el error según sea necesario
                                                     }
-                                                }
-                                                foreach ($_SESSION['productosOrden'] as $producto) {
+                                               
+                                                foreach ($_SESSION['productosOrden'] as $producto) 
+                                                {
                                                     $producto_id = $producto['id'];
                                                     $cantidad = $producto['unidades'];
-                                                // Limpiar productos de la orden en la sesión después de procesar correctamente
+                                                
                                                 $_SESSION['productosOrden'] = array();
-
+                                                 }   
+                                                 
+                                                 $pdf = generarPDFOrden($orden_id);
+                                                $mail= enviarEmailConPDF($clientEmail, $pdf);
+                                                    if($mail){
                                                 echo '<div class="container mt-6">
                                                         <div class="notification is-success">
                                                             <h2 class="subtitle">Orden de Compra Enviada</h2>
@@ -204,47 +212,7 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                                     </div>';
                                                     $query_update_stock = "UPDATE producto SET producto_stock = producto_stock - $cantidad WHERE producto_id = $producto_id";
                                                     $result_update_stock = $conexion->query($query_update_stock);
-                                                }
-                                                    // Generar PDF y enviarlo
-                                                    // ob_start();
-                                                    // require_once "./php/detalle_orden.php";
-                                                    // $pdf_content = ob_get_clean();
-                                            
-                                                    // // Envío por correo electrónico
-                                                    // $to = $_POST['client_email'];
-                                                    // $subject = "Confirmación de Orden de Compra";
-                                                    // $message = "Gracias por su orden. Adjunto encontrará los detalles de su orden.";
-                                                    // $headers = "From: el.costio_ferreteria@gmail.com" . "\r\n";
-                                                    // $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-                                            
-                                                    // // Adjunta el PDF al correo electrónico
-                                                    // $filename = "orden_de_compra.pdf";
-                                                    // $attachment = chunk_split(base64_encode($pdf_content));
-                                                    // $boundary = md5(time());
-                                            
-                                                    // $headers .= "--$boundary\r\n";
-                                                    // $headers .= "Content-Type: application/pdf; name=\"$filename\"\r\n";
-                                                    // $headers .= "Content-Disposition: attachment; filename=\"$filename\"\r\n";
-                                                    // $headers .= "Content-Transfer-Encoding: base64\r\n";
-                                                    // $headers .= "\r\n$attachment\r\n";
-                                                    // $headers .= "--$boundary--";
-                                            
-                                                    // // Envía el correo electrónico
-                                                    //         if (mail($to, $subject, $message, $headers)) {
-                                                    //             echo '<div class="container mt-6">
-                                                    //                     <div class="notification is-success">
-                                                    //                         <h2 class="subtitle">Orden de Compra Enviada</h2>
-                                                    //                         <p>Se ha enviado la orden de compra al correo electrónico: ' . htmlspecialchars($to) . '</p>
-                                                    //                     </div>
-                                                    //                 </div>';
-                                                    //         } else {
-                                                    //             echo '<div class="container mt-6">
-                                                    //                     <div class="notification is-danger">
-                                                    //                         <h2 class="subtitle">Error al enviar la Orden de Compra</h2>
-                                                    //                         <p>Ocurrió un error al intentar enviar la orden de compra.</p>
-                                                    //                     </div>
-                                                    //                 </div>';
-                                                    //         }
+                                                    }
                                                     } else {
                                                     // Manejar el caso en que la inserción de la orden no fue exitosa
                                                     echo '<div class="container mt-6">
