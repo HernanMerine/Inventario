@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Usuarios</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Aquí incluye tus estilos CSS si los tienes -->
+    <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
     <div class="container is-fluid mb-6">
@@ -93,13 +93,12 @@
     </div>
 
     <script>
-        // JavaScript para vaciar campos del formulario
         document.addEventListener('DOMContentLoaded', function() {
             const btnLimpiarCampos = document.getElementById('btnLimpiarCampos');
             const formulario = document.querySelector('.FormularioAjax');
 
             btnLimpiarCampos.addEventListener('click', function() {
-                formulario.reset(); // Vacía todos los campos del formulario
+                formulario.reset();
             });
         });
     </script>
