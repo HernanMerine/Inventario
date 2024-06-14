@@ -29,7 +29,7 @@
                             $proveedor = $conexion->query("SELECT * FROM proveedor");
                             if ($proveedor->num_rows > 0) {
                                 while ($row = $proveedor->fetch_assoc()) {
-                                    echo '<option value="' . $row['proveedor_id'] . '">' . $row['nombre'] . '</option>';
+                                    echo '<option value="' . $row['proveedor_id'] . '">' . $row['proveedor_nombre'] . '</option>';
                                 }
                             }
                             $conexion->close();

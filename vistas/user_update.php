@@ -29,7 +29,11 @@ $id = limpiar_cadena($id);
 
         $rol_usuario = $datos['rol'];
         $es_administrador = ($rol_usuario == 1); 
+		
     ?>
+
+		<div class="form-rest mb-6 mt-6"></div>
+		
         <form action="./php/usuario_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off">
             <input type="hidden" name="usuario_id" value="<?php echo $datos['usuario_id']; ?>" required>
             
@@ -84,7 +88,7 @@ $id = limpiar_cadena($id);
             <?php } else { ?>
             <input type="hidden" name="rol" value="<?php echo $rol_usuario; ?>">
             <?php } ?>
-            <br><br>
+            <br>
             <p class="has-text-centered">
                 SI desea actualizar la clave de este usuario por favor llene los 2 campos. Si NO desea actualizar la clave deje los campos vacíos.
             </p>
@@ -103,7 +107,7 @@ $id = limpiar_cadena($id);
                     </div>
                 </div>
             </div>
-            <br><br><br>
+            <br>
 
             <p class="has-text-centered">
                 Para poder actualizar los datos de este usuario por favor ingrese su USUARIO y CLAVE con la que ha iniciado sesión

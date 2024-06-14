@@ -119,7 +119,7 @@ if ($categoria != $datos['categoria_id']) {
 
 /*== Actualizando datos ==*/
 $precio_calculado = $costo + ($costo * $porcentaje / 100);
-$query_update = "UPDATE producto SET producto_nombre='$nombre', producto_costo='$costo', producto_precio = '$precio_calculado', producto_stock='$stock', categoria_id='$categoria' WHERE producto_id='$id'";
+$query_update = "UPDATE producto SET producto_nombre='$nombre', producto_costo='$costo', producto_precio = '$precio_calculado', producto_stock='$stock', categoria_id='$categoria', porcentaje='$porcentaje' WHERE producto_id='$id'";
 if (mysqli_query($conexion, $query_update)) {
     echo '
         <div class="notification is-info is-light">
