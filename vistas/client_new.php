@@ -2,7 +2,7 @@
     <h1 class="title">Clientes</h1>
     <h2 class="subtitle">Nuevo cliente</h2>
 </div>
-<div class="container pb-6 pt-6">
+<div class="container pb-6 pt-6 pl-6 pr-6">  
 
     <?php
         require_once "./php/main.php";

@@ -6,7 +6,7 @@
     $id = (isset($_GET['cliente_id_up'])) ? $_GET['cliente_id_up'] : 0;
     $id = limpiar_cadena($id);
 ?>
-<div class="container is-fluid mb-6">
+<div class="container is-fluid pb-6 pt-6 pl-6 pr-6">  
     <?php if ($id == $_SESSION['id']) { ?>
         <h1 class="title">Mi cuenta</h1>
         <h2 class="subtitle">Actualizar datos de cuenta</h2>

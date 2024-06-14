@@ -3,7 +3,7 @@ ob_start();
 $inicio = ($pagina > 0) ? (($pagina * $registros) - $registros) : 0;
 $tabla = "";
 
-$campos = "proveedor.proveedor_id, proveedor.nombre, proveedor.contacto";
+$campos = "proveedor.proveedor_id, proveedor.proveedor_nombre, proveedor.proveedor_telefono,proveedor.proveedor_vendedor,proveedor.proveedor_mail,proveedor.proveedor_direccion";
 
 if (isset($busqueda) && $busqueda != "") {
 
@@ -39,7 +39,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                      <th>ID</th>
                      <th>Nombre</th>
                      <th>Mail</th>
-                     <th>Contacto</th>
+                     <th>Telefono</th>
                      <th>Vendedor</th>
                      <th>Direccion</th>
                      <th colspan="2">Opciones</th>
@@ -50,11 +50,11 @@ if ($total >= 1 && $pagina <= $Npaginas) {
     foreach ($datos as $row) {
         $tabla .= '<tr class="has-text-centered">
              <td>'. $row['proveedor_id'] .'</td>
-             <td>' . $row['nombre'] . '</td>
-             <td>' ."". '</td>
-             <td>' . $row['contacto'] . '</td>
-             <td>' ."". '</td>
-             <td>' ."". '</td>
+             <td>' . $row['proveedor_nombre'] . '</td>
+             <td>' .$row['proveedor_mail']. '</td>
+             <td>' . $row['proveedor_telefono'] . '</td>
+             <td>' .$row['proveedor_vendedor']. '</td>
+             <td>' .$row['proveedor_direccion']. '</td>
              <td> <a href="index.php?vista=proveedor_update&proveedor_id_up=' . $row['proveedor_id'] . '" class="button is-success is-rounded is-small">Actualizar</a></td>
              <td><a href="' . $url . $pagina . '&proveedor_id_del=' . $row['proveedor_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
         </td>
