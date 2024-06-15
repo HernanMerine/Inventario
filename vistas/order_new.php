@@ -198,9 +198,9 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                                 
                                                 $_SESSION['productosOrden'] = array();
                                                  }   
-                                                 
+                                                 $cliente_nombre_completo= ".$cliente_nombre. .$cliente_apellido.";
                                                  $pdf = generarPDFOrden($orden_id);
-                                                $mail= enviarEmailConPDF($clientEmail, $pdf);
+                                                $mail= enviarEmailConPDF($clientEmail, $pdf,$cliente_nombre_completo);
                                                     if($mail){
                                                 echo '<div class="container mt-6">
                                                         <div class="notification is-success">
