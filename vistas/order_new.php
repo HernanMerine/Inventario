@@ -147,15 +147,13 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                         }
                                     }
 
-                                    if (isset($_POST['send_order']))
-                                     {
+                                    if (isset($_POST['send_order'])) {
                                         $clientEmail = htmlspecialchars($_POST['client_email']);
                                         $query = "SELECT * FROM cliente WHERE cliente_email='$clientEmail'";
                                         $check_cliente = $conexion->query($query);
 
                                         // Cliente está registrado o no
-                                        if ($check_cliente->num_rows > 0) 
-                                        {
+                                        if ($check_cliente->num_rows > 0) {
                                             $cliente = $check_cliente->fetch_assoc();
                                             $cliente_id = $cliente['cliente_id']; 
                                             $cliente_nombre = $cliente['cliente_nombre']; 
@@ -179,58 +177,62 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
 
                                                     $query_insert_detalle = "INSERT INTO detalle_orden_de_compra (orden_id, producto_id, cantidad) VALUES ($orden_id, $producto_id, $cantidad)";
                                                     $result_insert_detalle = $conexion->query($query_insert_detalle);
-                                                    }
-                                                    // Verificar si la inserción en detalle_orden_de_compra fue exitosa
-                                                    if (!$result_insert_detalle) {
-                                                        echo '<div class="container mt-6">
-                                                                <div class="notification is-danger">
-                                                                    <h2 class="subtitle">Error al procesar la Orden de Compra</h2>
-                                                                    <p>Ocurrió un error al intentar procesar la orden de compra.</p>
-                                                                </div>
-                                                            </div>';
-                                                        exit; // Salir del script o manejar el error según sea necesario
-                                                    }
-                                               
-                                                foreach ($_SESSION['productosOrden'] as $producto) 
-                                                {
-                                                    $producto_id = $producto['id'];
-                                                    $cantidad = $producto['unidades'];
-                                                
-                                                $_SESSION['productosOrden'] = array();
-                                                 }   
-                                                 $cliente_nombre_completo= ".$cliente_nombre. .$cliente_apellido.";
-                                                 $pdf = generarPDFOrden($orden_id);
-                                                $mail= enviarEmailConPDF($clientEmail, $pdf,$cliente_nombre_completo);
-                                                    if($mail){
-                                                echo '<div class="container mt-6">
-                                                        <div class="notification is-success">
-                                                            <h2 class="subtitle">Orden de Compra Enviada</h2>
-                                                            <p>Cliente: ' . htmlspecialchars($cliente_nombre) . ' ' . htmlspecialchars($cliente_apellido) . '</p>
-                                                            <p>Cliente: ' . htmlspecialchars($clientEmail) . '</p>
-                                                            <p>Total: $' . number_format($totalOrden, 2) . '</p>
-                                                        </div>
-                                                    </div>';
-                                                    $query_update_stock = "UPDATE producto SET producto_stock = producto_stock - $cantidad WHERE producto_id = $producto_id";
-                                                    $result_update_stock = $conexion->query($query_update_stock);
-                                                    }
-                                                    } else {
-                                                    // Manejar el caso en que la inserción de la orden no fue exitosa
+                                                }
+
+                                                // Verificar si la inserción en detalle_orden_de_compra fue exitosa
+                                                if (!$result_insert_detalle) {
                                                     echo '<div class="container mt-6">
                                                             <div class="notification is-danger">
                                                                 <h2 class="subtitle">Error al procesar la Orden de Compra</h2>
                                                                 <p>Ocurrió un error al intentar procesar la orden de compra.</p>
                                                             </div>
                                                         </div>';
-                                                         }
-                                            }       else {
-                                                // Cliente no registrado, mostrar mensaje de error
+                                                    exit; // Salir del script o manejar el error según sea necesario
+                                                }
+
+                                                foreach ($_SESSION['productosOrden'] as $producto) {
+                                                    $producto_id = $producto['id'];
+                                                    $cantidad = $producto['unidades'];
+
+                                                    $_SESSION['productosOrden'] = array();
+                                                }
+
+                                                $cliente_nombre_completo = $cliente_nombre . ' ' . $cliente_apellido;
+                                                $pdf = generarPDFOrden($orden_id);
+                                                $mail = enviarEmailConPDF($clientEmail, $pdf, $cliente_nombre_completo);
+
+                                                if ($mail) {
+                                                    echo '<div class="container mt-6">
+                                                            <div class="notification is-success">
+                                                                <h2 class="subtitle">Orden de Compra Enviada</h2>
+                                                                <p>Cliente: ' . htmlspecialchars($cliente_nombre) . ' ' . htmlspecialchars($cliente_apellido) . '</p>
+                                                                <p>Correo: ' . htmlspecialchars($clientEmail) . '</p>
+                                                                <p>Total: $' . number_format($totalOrden, 2) . '</p>
+                                                            </div>
+                                                        </div>';
+                                                    $query_update_stock = "UPDATE producto SET producto_stock = producto_stock - $cantidad WHERE producto_id = $producto_id";
+                                                    $result_update_stock = $conexion->query($query_update_stock);
+                                                }
+                                            } else {
                                                 echo '<div class="container mt-6">
                                                         <div class="notification is-danger">
-                                                            <h2 class="subtitle">Cliente No Registrado</h2>
-                                                            <p>El correo electrónico ingresado no corresponde a un cliente registrado.</p>
+                                                            <h2 class="subtitle">Error al procesar la Orden de Compra</h2>
+                                                            <p>Ocurrió un error al intentar procesar la orden de compra.</p>
                                                         </div>
                                                     </div>';
                                             }
+                                        } else {
+                                            echo '<div class="container mt-6">
+                                                    <div class="notification is-danger">
+                                                        <h2 class="subtitle">Cliente No Registrado</h2>
+                                                        <p>El correo electrónico ingresado no corresponde a un cliente registrado.</p>
+                                                    </div>
+                                                </div>';
+                                        }
+                                    }
+
+                                    if (isset($_POST['empty_order'])) {
+                                        $_SESSION['productosOrden'] = array();
                                     }
                                 }
 
@@ -252,7 +254,6 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                         $totalOrden += $producto['subtotal'];
                                     }
                                 }
-                                
                                 ?>
                             </tbody>
                         </table>
@@ -267,9 +268,10 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                             </div>
 
                             <button class="button is-primary" type="submit" name="send_order">Confirmar Orden</button>
-                          <a href="./php/detalle_orden.php"> ver pdf</a>
                         </form>
-
+                        <form method="post">
+                            <button class="button is-warning mt-2" type="submit" name="empty_order">Vaciar Orden</button>
+                        </form>
                     </div>
                 </div>
             </div>

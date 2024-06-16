@@ -8,8 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function enviarEmailConPDF($emailCliente, $pdf,$cliente_nombre_completo)
-{
+function enviarEmailConPDF($emailCliente, $pdf, $cliente_nombre_completo) {
     $mail = new PHPMailer();
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
@@ -96,8 +95,9 @@ function enviarEmailConPDF($emailCliente, $pdf,$cliente_nombre_completo)
     ';
     $mail->addStringAttachment($pdf,'orden_de_compra.pdf');
 
-    $mail->send();
+    return $mail->send();
 }
+
 
 function enviarEmailConPDF2($emailCliente, $pdf) {
     ini_set('SMTP', 'smtp.gmail.com');
@@ -179,11 +179,11 @@ function enviarEmailConPDF2($emailCliente, $pdf) {
     </html>
     ';
     $headers = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-type: text/html; charset=utf-8\r\n"; // Usamos .= para concatenar
+    $headers .= "Content-type: text/html; charset=utf-8\r\n"; 
     //dirección del remitente
-    $headers .= "From: $nombre <$from>\r\n"; // Usamos .= para concatenar
+    $headers .= "From: $nombre <$from>\r\n"; 
     //ruta del mensaje desde origen a destino
-    $headers .= "Return-path: <$destino>\r\n"; // Usamos .= para concatenar
+    $headers .= "Return-path: <$destino>\r\n"; 
   
     // Encabezados del correo
     $mime_boundary = md5(time());
@@ -204,7 +204,7 @@ function enviarEmailConPDF2($emailCliente, $pdf) {
                 "--{$mime_boundary}--";
 
     // Enviar el correo
-    $mail = mail($destino, $subject,  $message, $headers); // No necesitas definir $returnpath, ya que está implícito en el encabezado "From"
+    $mail = mail($destino, $subject,  $message, $headers); 
 
     if ($mail) {
         echo 'El mensaje ha sido enviado';
