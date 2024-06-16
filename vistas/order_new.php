@@ -267,7 +267,7 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                             </div>
 
                             <button class="button is-primary" type="submit" name="send_order">Confirmar Orden</button>
-                          <a href="./php/detalle_orden.php"> ver pdf</a>
+                        
                         </form>
 
                     </div>
