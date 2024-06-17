@@ -18,7 +18,7 @@
                     <a class="navbar-link">Usuarios</a>
                     <div class="navbar-dropdown">
                         <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
-                        <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=user_list" class="navbar-item">Lista de Usuarios</a>
                         <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
                     </div>
                 </div>
@@ -28,8 +28,8 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Clientes</a>
                     <div class="navbar-dropdown">
-                        <a href="index.php?vista=client_new" class="navbar-item">Nuevo</a>
-                        <a href="index.php?vista=client_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=client_new" class="navbar-item">Agregar Cliente</a>
+                        <a href="index.php?vista=client_list" class="navbar-item">Lista de Clientes</a>
                         <a href="index.php?vista=client_search" class="navbar-item">Buscar</a>
                     </div>
                 </div>
@@ -37,8 +37,8 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Órdenes de compra</a>
                     <div class="navbar-dropdown">
-                        <a href="index.php?vista=order_new" class="navbar-item">Crear Orden</a>
-                        <a href="index.php?vista=order_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=order_new" class="navbar-item">Crear Nueva Orden</a>
+                        <a href="index.php?vista=order_list" class="navbar-item">Ordenes de Compra</a>
                         <a href="index.php?vista=order_search" class="navbar-item">Buscar</a>
                     </div>
                 </div>
