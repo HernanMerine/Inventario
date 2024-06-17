@@ -97,6 +97,7 @@ function enviarEmailConPDF($emailCliente, $pdf,$cliente_nombre_completo)
     $mail->addStringAttachment($pdf,'orden_de_compra.pdf');
 
     $mail->send();
+    return $mail;   
 }
 
 function enviarEmailConPDF2($emailCliente, $pdf) {
