@@ -78,9 +78,6 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                 <td>
                    <a href="index.php?vista=orden_detalle&orden_id=' . htmlspecialchars($rows['orden_id'], ENT_QUOTES, 'UTF-8') . '" class="button is-success is-rounded is-small">Ver detalle</a>
                 </td>
-                <td>
-                    <a href="' . $url . $pagina . '&order_id_del=' . $rows['orden_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
-                </td>
             </tr>
         ';
         $contador++;

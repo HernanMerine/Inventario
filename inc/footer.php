@@ -2,8 +2,13 @@
     <style>
         .footer-custom{
             background-color: #363636;
-    color:#fafafa;
-    padding: 3rem 1.5rem 3rem
+            color:#fafafa;
+            padding: 2rem 1.5rem 2rem;
+            bottom:0;
+            position: fixed;
+
+            display: block;
+            width: 100%;
         }
     </style>
    <footer class="footer-custom">

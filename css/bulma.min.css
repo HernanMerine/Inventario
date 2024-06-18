@@ -16,7 +16,9 @@
     padding-right: calc(.75em - 1px);
     padding-top: calc(.5em - 1px);
     position: relative;
-    vertical-align: top
+    vertical-align: top;
+    -webkit-appearance: none; /* Propiedad con prefijo de proveedor */
+    appearance: none;   
 }
 
 .button:active,.button:focus,.file-cta:active,.file-cta:focus,.file-name:active,.file-name:focus,.input:active,.input:focus,.is-active.button,.is-active.file-cta,.is-active.file-name,.is-active.input,.is-active.pagination-ellipsis,.is-active.pagination-link,.is-active.pagination-next,.is-active.pagination-previous,.is-active.textarea,.is-focused.button,.is-focused.file-cta,.is-focused.file-name,.is-focused.input,.is-focused.pagination-ellipsis,.is-focused.pagination-link,.is-focused.pagination-next,.is-focused.pagination-previous,.is-focused.textarea,.pagination-ellipsis:active,.pagination-ellipsis:focus,.pagination-link:active,.pagination-link:focus,.pagination-next:active,.pagination-next:focus,.pagination-previous:active,.pagination-previous:focus,.select select.is-active,.select select.is-focused,.select select:active,.select select:focus,.textarea:active,.textarea:focus {
@@ -64,6 +66,8 @@
     user-select: none;
     -moz-appearance: none;
     -webkit-appearance: none;
+    -webkit-appearance: none; /* Propiedad con prefijo de proveedor */
+    appearance: none;   
     background-color: rgba(10,10,10,.2);
     border: none;
     border-radius: 9999px;
@@ -2279,6 +2283,8 @@ div.icon-text {
 .progress {
     -moz-appearance: none;
     -webkit-appearance: none;
+    -webkit-appearance: none; /* Propiedad con prefijo de proveedor */
+    appearance: none;   
     border: none;
     border-radius: 9999px;
     display: block;
@@ -5055,7 +5061,10 @@ a.dropdown-item.is-active,button.dropdown-item.is-active {
     flex-direction: column;
     max-height: calc(100vh - 40px);
     overflow: hidden;
-    -ms-overflow-y: visible
+    -ms-overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;  
+    
 }
 
 .modal-card-foot,.modal-card-head {
