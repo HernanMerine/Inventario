@@ -75,7 +75,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                 <td>' . $rows['cliente_nombre'] . ' ' . $rows['cliente_apellido'] . '</td>
                 <td>' . $rows['usuario_nombre'] . ' ' . $rows['usuario_apellido'] . '</td>
                 <td>
-                    <a href="orden_detalle.php?orden=' . $rows['orden_id'] . '" class="button is-success is-rounded is-small">Ver detalle</a>
+                    <td><a href="index.php?vista=orden_detalle&orden_id=' . htmlspecialchars($rows['orden_id'], ENT_QUOTES, 'UTF-8') . '" class="button is-success is-rounded is-small">Actualizar</a></td>
                 </td>
                 <td>
                     <a href="' . $url . $pagina . '&order_id_del=' . $rows['orden_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>

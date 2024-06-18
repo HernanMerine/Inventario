@@ -2,7 +2,7 @@
         <div class="hero-body">
 		<div class="container  pt-4 pb-4 pl-3">
                 <h1 class="title is-medium">
-                    Sistema de Inventario y Gestión de Órdenes
+                    Sistema de Inventario y Gestión de Órdenes de compra <strong>StockGuardian</strong> 
                 </h1>
 				
                 <h2 class="subtitle">
@@ -93,11 +93,4 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>
-                <strong>Sistema de Inventario y Gestión de Órdenes</strong> por <a href="#">Tu Empresa</a>. 
-            </p>
-        </div>
-    </footer>
+ 

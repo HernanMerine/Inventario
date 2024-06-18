@@ -12,7 +12,6 @@
         $id = (isset($_GET['product_id_up'])) ? $_GET['product_id_up'] : 0;
         $id = limpiar_cadena($id);
 
-        /*== Verificando producto ==*/
         $conexion = conexion();
 
         $check_producto = $conexion->query("SELECT * FROM producto WHERE producto_id='$id'");

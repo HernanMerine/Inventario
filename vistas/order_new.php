@@ -99,7 +99,7 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
 
                 <!-- Orden de Compra -->
                 <div class="column is-flex-grow-1">
-                    <h2 class="subtitle">Orden de Compra</h2>
+                    <h2 class="subtitle"><strong>Orden de Compra</strong></h2>
                     <div class="box">
                         <table class="table is-fullwidth">
                             <thead>
@@ -256,22 +256,30 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                 }
                                 ?>
                             </tbody>
-                        </table>
+                        </table>  
+                    <h3 class="title is-4">Total: $<?php echo number_format($totalOrden, 2); ?></h3>
 
-                        <h3 class="title is-4">Total: $<?php echo number_format($totalOrden, 2); ?></h3>
-                        <form method="post">
-                            <div class="field">
-                                <label class="label">Correo Electrónico del Cliente</label>
-                                <div class="control">
-                                    <input class="input" type="email" name="client_email" placeholder="Ingrese el correo electrónico del cliente" required>
-                                </div>
+                    <div class="field">
+                        <form method="post" style="display: inline;">
+                            <label class="label">Correo Electrónico del Cliente</label>
+                            <div class="control">
+                                <input class="input" type="email" name="client_email" placeholder="Ingrese el correo electrónico del cliente" required>
                             </div>
+                        </form>
+                    </div>
 
-                            <button class="button is-primary" type="submit" name="send_order">Confirmar Orden</button>
-                        </form>
-                        <form method="post">
-                            <button class="button is-warning mt-2" type="submit" name="empty_order">Vaciar Orden</button>
-                        </form>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <form method="post" style="display: inline;">
+                                <button class="button is-primary is-medium" type="submit" name="send_order">Confirmar Orden</button>
+                            </form>
+                        </div>
+                        <div class="control">
+                            <form method="post" style="display: inline;">
+                                <button class="button is-warning is-medium" type="submit" name="empty_order">Vaciar Orden</button>
+                            </form>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

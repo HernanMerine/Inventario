@@ -48,8 +48,8 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Proveedores</a>
                     <div class="navbar-dropdown">
-                        <a href="index.php?vista=proveedor_new" class="navbar-item">Nuevo</a>
-                        <a href="index.php?vista=proveedor_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=proveedor_new" class="navbar-item">Nuevo Proveedor</a>
+                        <a href="index.php?vista=proveedor_list" class="navbar-item">Lista de Proveedores</a>
                         <a href="index.php?vista=proveedor_search" class="navbar-item">Buscar</a>
                     </div>
                 </div>
@@ -57,8 +57,8 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Categorías</a>
                     <div class="navbar-dropdown">
-                        <a href="index.php?vista=category_new" class="navbar-item">Nueva</a>
-                        <a href="index.php?vista=category_list" class="navbar-item">Lista</a>
+                        <a href="index.php?vista=category_new" class="navbar-item">Agregar Categoría</a>
+                        <a href="index.php?vista=category_list" class="navbar-item">Todas las Categorías</a>
                         <a href="index.php?vista=category_search" class="navbar-item">Buscar</a>
                     </div>
                 </div>
@@ -66,9 +66,9 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Productos</a>
                     <div class="navbar-dropdown">
-                        <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
-                        <a href="index.php?vista=product_list" class="navbar-item">Lista</a>
-                        <a href="index.php?vista=product_category" class="navbar-item">Por categoría</a>
+                        <a href="index.php?vista=product_new" class="navbar-item">Ingresar Producto</a>
+                        <a href="index.php?vista=product_list" class="navbar-item">Inventario Completo</a>
+                        <a href="index.php?vista=product_category" class="navbar-item">Productos por Caterogría</a>
                         <a href="index.php?vista=product_search" class="navbar-item">Buscar</a>
                     </div>
                 </div>
