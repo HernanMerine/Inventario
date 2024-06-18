@@ -3,7 +3,7 @@
     <h2 class="subtitle">Buscar Orden de Compra</h2>
 </div>
 
-<div class="container pb-6 pt-6 pl-5 pr-5">
+<div class="container pb-6 pt-6 pl-5 pr-5 mb-9">
     <?php
     require_once "./php/main.php";
 
@@ -22,7 +22,7 @@
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="Buscar por vendedor, cliente o fecha" maxlength="50">
                     </p>
                     <p class="control">
-                        <button class="button is-info" type="submit">Buscar</button>
+                        <button class="button is-info is-rounded" type="submit">Buscar</button>
                     </p>
                 </div>
             </form>

@@ -22,7 +22,7 @@
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
                     </p>
                     <p class="control">
-                        <button class="button is-info" type="submit" >Buscar</button>
+                        <button class="button is-info is-rounded" type="submit" >Buscar</button>
                     </p>
                 </div>
             </form>
@@ -40,7 +40,8 @@
             </form>
         </div>
     </div>
-    <?php
+    <?php 
+    } 
             # Eliminar proveedor #
             if(isset($_GET['proveedor_id_del'])){
                 require_once "./php/proveedor_eliminar.php"; // Cambiar a proveedor_eliminar.php
@@ -58,10 +59,10 @@
             $pagina=limpiar_cadena($pagina);
             $url="index.php?vista=proveedor_search&page="; /* <== Cambiar a proveedor_search */
             $registros=15;
-            $busqueda=$_SESSION['busqueda_proveedor']; /* <== Cambiar a busqueda_proveedor */
+            $busqueda = isset($_SESSION['busqueda_proveedor']) ? $_SESSION['busqueda_proveedor'] : '';/* <== Cambiar a busqueda_proveedor */
 
             # Paginador proveedor #
             require_once "./php/proveedor_lista.php"; // Cambiar a proveedor_lista.php
-        } 
+       
     ?>
 </div>

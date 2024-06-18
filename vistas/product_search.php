@@ -11,24 +11,30 @@
             require_once "./php/buscador.php";
         }
 
-        if(!isset($_SESSION['busqueda_producto']) && empty($_SESSION['busqueda_producto'])){
+        // Ensure the session is started
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Check if 'busqueda_producto' is set in the session
+        if(!isset($_SESSION['busqueda_producto']) || empty($_SESSION['busqueda_producto'])){
     ?>
     <div class="columns">
         <div class="column">
-            <form action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="producto">
+            <form action="" method="POST" autocomplete="off">
+                <input type="hidden" name="modulo_buscador" value="orden_de_compra">
                 <div class="field is-grouped">
                     <p class="control is-expanded">
-                        <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
+                        <input class="input is-rounded" type="text" name="txt_buscador" placeholder="Buscar producto" maxlength="50">
                     </p>
                     <p class="control">
-                        <button class="button is-info" type="submit" >Buscar</button>
+                        <button class="button is-info is-rounded" type="submit">Buscar</button>
                     </p>
                 </div>
             </form>
         </div>
     </div>
-    <?php }else{ ?>
+    <?php } else { ?>
     <div class="columns">
         <div class="column">
             <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
@@ -40,30 +46,30 @@
             </form>
         </div>
     </div>
-    <?php
-            # Eliminar producto #
+    <?php 
+    }
+            // Eliminar producto
             if(isset($_GET['product_id_del'])){
                 require_once "./php/producto_eliminar.php";
             }
 
-            if(!isset($_GET['page'])){
-                $pagina=1;
-            }else{
-                $pagina=(int) $_GET['page'];
-                if($pagina<=1){
-                    $pagina=1;
-                }
+            // Determine the page number
+            $pagina = (isset($_GET['page'])) ? (int) $_GET['page'] : 1;
+            if($pagina <= 1){
+                $pagina = 1;
             }
 
+            // Determine the category ID
             $categoria_id = (isset($_GET['category_id'])) ? $_GET['category_id'] : 0;
 
-            $pagina=limpiar_cadena($pagina);
-            $url="index.php?vista=product_search&page="; /* <== */
-            $registros=15;
-            $busqueda=$_SESSION['busqueda_producto']; /* <== */
+            $pagina = limpiar_cadena($pagina);
+            $url = "index.php?vista=product_search&page="; 
+            $registros = 15;
+            
+            // Initialize 'busqueda_producto' if it is not set
+            $busqueda = isset($_SESSION['busqueda_producto']) ? $_SESSION['busqueda_producto'] : '';
 
-            # Paginador producto #
+            // Paginador producto
             require_once "./php/producto_lista.php";
-        } 
     ?>
 </div>

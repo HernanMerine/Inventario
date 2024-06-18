@@ -22,7 +22,7 @@
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
                     </p>
                     <p class="control">
-                        <button class="button is-info" type="submit" >Buscar</button>
+                        <button class="button is-info is-rounded" type="submit" >Buscar</button>
                     </p>
                 </div>
             </form>
@@ -41,6 +41,7 @@
         </div>
     </div>
     <?php
+    } 
             # Eliminar usuario #
             if(isset($_GET['user_id_del'])){
                 require_once "./php/usuario_eliminar.php";
@@ -58,10 +59,11 @@
             $pagina=limpiar_cadena($pagina);
             $url="index.php?vista=user_search&page="; /* <== */
             $registros=15;
-            $busqueda=$_SESSION['busqueda_usuario']; /* <== */
+            $busqueda = isset($_SESSION['busqueda_usuario']) ? $_SESSION['busqueda_usuario'] : '';/* <== Cambiar a busqueda_proveedor */
+
 
             # Paginador usuario #
             require_once "./php/usuario_lista.php";
-        } 
+        
     ?>
 </div>
