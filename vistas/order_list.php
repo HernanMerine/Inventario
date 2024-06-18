@@ -1,14 +1,14 @@
   
     <section class="hero is-small">
         <div class="hero-body">
-		<div class="container  pt-4 pb-4 pl-3">
+		<div class="container  pt-4 pb-4 pl-3 mb-2">
                  <h1 class="title">Ordenes de Compra</h1>
     <h2 class="subtitle">Listado de Ordenes</h2>
 			
             </div>
         </div>
     </section>
-    <div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
+    <div class="container pb-6 pt-6 pl-5 pr-5 ">
     <?php
         require_once "./php/main.php";
 

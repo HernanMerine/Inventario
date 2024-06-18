@@ -2,6 +2,7 @@ body,html{
 	height: 100%;
 	width: 100%;
 	font-size: 105%;
+	margin-bottom: 500px; 
 }
 .main-container{
 	height: 100%;
@@ -9,6 +10,7 @@ body,html{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 }
 .main-container > .login,
 .main-container > .hero-body{

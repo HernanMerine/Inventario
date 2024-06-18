@@ -267,6 +267,8 @@ body {
     font-size: 120%;
     font-weight: 400;
     line-height: 1.5;
+    margin-bottom: 500px;
+  
 }
 
 a {
@@ -1755,12 +1757,23 @@ a.box:active {
     margin-left: .25rem;
     margin-right: .25rem
 }
-
+.container-main{
+    background-color:#ffffff7c;
+    flex-grow: 1;
+    margin-top: 10px;
+    margin-bottom: 120px ;
+    margin-left: 10px;
+    margin-right: 10px;
+    position:relative;
+    width: auto;
+    overflow-x: hidden;
+    overflow-y:hidden;
+}
 .container {
     background-color:#ffffff7c;
     flex-grow: 1;
-    margin: 0 auto;
-    position: relative;
+    margin:0 auto;
+    position:relative;
     width: auto;
     overflow-x: hidden;
     overflow-y:hidden;
