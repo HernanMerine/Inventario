@@ -39,7 +39,7 @@
                     <div class="navbar-dropdown">
                         <a href="index.php?vista=order_new" class="navbar-item">Crear Nueva Orden</a>
                         <a href="index.php?vista=order_list" class="navbar-item">Ordenes de Compra</a>
-                        <a href="index.php?vista=order_search" class="navbar-item">Buscar</a>
+                        <a href="index.php?vista=orden_de_compra_search" class="navbar-item">Buscar</a>
                     </div>
                 </div>
             <?php } ?>

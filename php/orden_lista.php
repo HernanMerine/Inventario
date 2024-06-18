@@ -15,7 +15,8 @@ if (isset($busqueda) && $busqueda != "") {
             OR usuario.usuario_nombre LIKE '%$busqueda%' 
             OR usuario.usuario_apellido LIKE '%$busqueda%' 
             OR orden_de_compra.orden_id LIKE '%$busqueda%'
-        ORDER BY 
+            OR orden_de_compra.orden_fecha LIKE '%$busqueda%'        
+            ORDER BY 
             orden_de_compra.orden_fecha DESC 
         LIMIT $inicio, $registros";
     
@@ -119,4 +120,3 @@ echo $tabla;
 if ($total >= 1 && $pagina <= $Npaginas) {
     echo paginador_tablas($pagina, $Npaginas, $url, 7);
 }
-?>
