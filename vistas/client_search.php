@@ -25,7 +25,7 @@
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
                     </p>
                     <p class="control">
-                        <button class="button is-info" type="submit" >Buscar</button>
+                        <button class="button is-info is-rounded" type="submit" >Buscar</button>
                     </p>
                 </div>
             </form>
@@ -44,7 +44,8 @@
         </div>
     </div>
     <?php
-            # Eliminar cliente #
+         }  
+           # Eliminar cliente #
             if(isset($_GET['client_id_del'])){
                 require_once "./php/cliente_eliminar.php";
             }
@@ -61,10 +62,11 @@
             $pagina=limpiar_cadena($pagina);
             $url="index.php?vista=client_search&page="; /* <== */
             $registros=15;
-            $busqueda=$_SESSION['busqueda_cliente']; /* <== */
+            $busqueda = isset($_SESSION['busqueda_cliente']) ? $_SESSION['busqueda_cliente'] : '';/* <== Cambiar a busqueda_proveedor */
+            /* <== */
 
             # Paginador cliente #
             require_once "./php/cliente_lista.php";
-        } 
+        
     ?>
 </div>

@@ -25,7 +25,7 @@
                 include "./vistas/".$_GET['vista'].".php";
 
                 include "./inc/script.php";
-             
+                
 
             }else{
                 if($_GET['vista']=="login"){
@@ -35,6 +35,11 @@
                 }
             }
         ?>
+        <footer>
+            <?php
+                include "./inc/footer.php";
+            ?>
+        </footer>
     </body>
 
     <?php    include "./inc/footer.php";  ?>

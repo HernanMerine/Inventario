@@ -25,7 +25,7 @@
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
                     </p>
                     <p class="control">
-                        <button class="button is-info" type="submit" >Buscar</button>
+                        <button class="button is-info is-rounded" type="submit" >Buscar</button>
                     </p>
                 </div>
             </form>
@@ -45,6 +45,7 @@
     </div>
 
     <?php
+    } 
             # Eliminar categoria #
             if(isset($_GET['category_id_del'])){
                 require_once "./php/categoria_eliminar.php";
@@ -62,10 +63,11 @@
             $pagina=limpiar_cadena($pagina);
             $url="index.php?vista=category_search&page="; /* <== */
             $registros=15;
-            $busqueda=$_SESSION['busqueda_categoria']; /* <== */
+            $busqueda = isset($_SESSION['busqueda_categoria']) ? $_SESSION['busqueda_categoria'] : '';/* <== Cambiar a busqueda_proveedor */
+            /* <== */
 
             # Paginador categoria #
             require_once "./php/categoria_lista.php";
-        } 
+        
     ?>
 </div>

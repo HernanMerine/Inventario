@@ -15,7 +15,8 @@ if (isset($busqueda) && $busqueda != "") {
             OR usuario.usuario_nombre LIKE '%$busqueda%' 
             OR usuario.usuario_apellido LIKE '%$busqueda%' 
             OR orden_de_compra.orden_id LIKE '%$busqueda%'
-        ORDER BY 
+            OR orden_de_compra.orden_fecha LIKE '%$busqueda%'        
+            ORDER BY 
             orden_de_compra.orden_fecha DESC 
         LIMIT $inicio, $registros";
     
@@ -77,9 +78,6 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                 <td>
                    <a href="index.php?vista=orden_detalle&orden_id=' . htmlspecialchars($rows['orden_id'], ENT_QUOTES, 'UTF-8') . '" class="button is-success is-rounded is-small">Ver detalle</a>
                 </td>
-                <td>
-                    <a href="' . $url . $pagina . '&order_id_del=' . $rows['orden_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
-                </td>
             </tr>
         ';
         $contador++;
@@ -119,4 +117,3 @@ echo $tabla;
 if ($total >= 1 && $pagina <= $Npaginas) {
     echo paginador_tablas($pagina, $Npaginas, $url, 7);
 }
-?>
