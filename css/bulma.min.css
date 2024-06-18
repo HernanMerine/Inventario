@@ -11661,6 +11661,7 @@ a.has-text-danger-dark:focus,a.has-text-danger-dark:hover {
 }
 
 .footer {
-    background-color: #fafafa;
-    padding: 3rem 1.5rem 6rem
+    background-color: #363636;
+    color:#fafafa;
+    padding: 3rem 1.5rem 3rem
 }
