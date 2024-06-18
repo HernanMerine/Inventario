@@ -6,11 +6,21 @@
     <title>Formulario de Productos</title>
 </head>
 <body>
-    <div class="container is-fluid mb-6">
-        <h1 class="title">Productos</h1>
-        <h2 class="subtitle">Nuevo producto</h2>
-    </div>
-    <div class="container pb-6 pt-6 pl-5 pr-5">
+<section class="hero is-small">
+        <div class="hero-body">
+		<div class="container  pt-4 pb-4 pl-3">
+               <h1 class="title is-medium">
+                 Nuevo Producto
+                </h1>
+				
+                <h2 class="subtitle">
+                   Complete los datos del producto para agregarlo.
+                </h2>
+			
+            </div>
+        </div>
+    </section>
+    <div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
         <?php require_once "./php/main.php"; ?>
         <div class="form-rest mb-6 mt-6"></div>
 

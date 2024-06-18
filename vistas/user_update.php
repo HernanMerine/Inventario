@@ -6,17 +6,21 @@ $conexion = conexion();
 $id = (isset($_GET['user_id_up'])) ? $_GET['user_id_up'] : 0;
 $id = limpiar_cadena($id);
 ?>
-<div class="container is-fluid mb-6">
-    <?php if ($id == $_SESSION['id']) { ?>
-        <h1 class="title">Mi cuenta</h1>
-        <h2 class="subtitle">Actualizar datos de cuenta</h2>
-    <?php } else { ?>
-        <h1 class="title">Usuarios</h1>
-        <h2 class="subtitle">Actualizar usuario</h2>
-    <?php } ?>
-</div>
+<section class="hero is-small">
+        <div class="hero-body">
+                <div class="container  pt-4 pb-4 pl-3">  
+                        <?php if ($id == $_SESSION['id']) { ?>
+                        <h1 class="title">Mi cuenta</h1>
+                        <h2 class="subtitle">Actualizar datos de cuenta</h2>
+                    <?php } else { ?>
+                        <h1 class="title">Usuarios</h1>
+                        <h2 class="subtitle">Actualizar usuario</h2>
+                    <?php } ?>
+                </div>
+        </div>
+    </section>
 
-<div class="container pb-6 pt-6 pl-5 pr-5">
+<div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
     <?php
     include "./inc/btn_back.php";
 
@@ -90,7 +94,7 @@ $id = limpiar_cadena($id);
             <?php } ?>
             <br>
             <p class="has-text-centered">
-                SI desea actualizar la clave de este usuario por favor llene los 2 campos. Si NO desea actualizar la clave deje los campos vacíos.
+              <strong>  SI desea actualizar la clave de este usuario por favor llene los 2 campos. Si NO desea actualizar la clave deje los campos vacíos.</strong>
             </p>
             <br>
             <div class="columns">
@@ -110,7 +114,7 @@ $id = limpiar_cadena($id);
             <br>
 
             <p class="has-text-centered">
-                Para poder actualizar los datos de este usuario por favor ingrese su USUARIO y CLAVE con la que ha iniciado sesión
+              <strong>  Para poder actualizar los datos de este usuario por favor ingrese su USUARIO y CLAVE con la que ha iniciado sesión.</strong>
             </p>
             <br>
             <div class="columns">

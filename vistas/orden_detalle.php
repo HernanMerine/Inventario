@@ -80,10 +80,16 @@ mysqli_close($conexion);
 </head>
 <body>
 
-<div class="container pb-6 pt-6 pl-6 pr-6 mt-6">
-<?php include "./inc/btn_back.php"; ?>
+    <div class="container pb-6 pt-6 pl-5 pr-5 mt-6 mb-6">
+
     <?php if (!empty($detalle)): ?> 
-        <h1 class="title"><strong>Detalle de la Compra #<?php echo htmlspecialchars($detalle[0]['orden_id'], ENT_QUOTES, 'UTF-8'); ?></strong></h1>
+        <div class="columns">
+            <div class="column">
+                <h1 class="title"><strong>Detalle de la Compra #<?php echo htmlspecialchars($detalle[0]['orden_id'], ENT_QUOTES, 'UTF-8'); ?></strong></h1>
+        </div>
+        <div class="column"> <?php include "./inc/btn_back.php"; ?></div>
+    </div>
+        
         <div class="columns">
             <div class="column">
                 <div class="box">
@@ -133,6 +139,7 @@ mysqli_close($conexion);
             </table>
          </div>
     <?php else: ?>
+        <?php include "./inc/btn_back.php"; ?>
         <div class="notification is-danger">
         <h1 class="title"><strong>Detalle de la Orden no encontrado </h1>
         <p>No se encontró la orden de compra en la Base de Datos.</p>

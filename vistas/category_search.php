@@ -1,9 +1,12 @@
-<div class="container is-fluid mb-6">
-    <h1 class="title">Categorías</h1>
+<section class="hero is-small">
+        <div class="hero-body">
+		<div class="container  pt-4 pb-4 pl-3">
+			  <h1 class="title">Categorías</h1>
     <h2 class="subtitle">Buscar categoría</h2>
-</div>
-
-<div class="container pb-6 pt-6 pl-5 pr-5">
+            </div>
+        </div>
+    </section>
+    <div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
     <?php
         require_once "./php/main.php";
 

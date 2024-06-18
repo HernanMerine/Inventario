@@ -1,15 +1,19 @@
    <!-- Footer -->
-    <style>
-        .footer-custom{
-            background-color: #363636;
-    color:#fafafa;
-    padding: 3rem 1.5rem 3rem
-        }
-    </style>
-   <footer class="footer-custom">
-        <div class="content has-text-centered">
-            <p>
-                <strong>Sistema de Inventario y Gestión de Órdenes</strong> por <a href="#">Tu Empresa</a>. 
-            </p>
-        </div>
-    </footer>
+   <style>
+    .footer-custom {
+        width: 100%;
+        background-color: #363636;
+        color: #fafafa;
+        padding: 3rem 1.5rem;
+ 
+        bottom: 0;
+    }
+    
+</style>
+<footer class="footer-custom">
+    <div class="columns">
+        <div class="column has-text-right pt-5"><p>Sistema de Inventario y Gestión de Órdenes por</p></div>
+    
+        <div class="column"><img src="./img/StockGuardianLogoGrande.png" width="250px" alt="Usuarios"></div> 
+    </div>
+</footer>

@@ -286,4 +286,5 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
         </div>
     </section>
 </body>
+
 </html>

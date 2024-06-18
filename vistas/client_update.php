@@ -6,17 +6,17 @@
     $id = (isset($_GET['cliente_id_up'])) ? $_GET['cliente_id_up'] : 0;
     $id = limpiar_cadena($id);
 ?>
-<div class="container is-fluid pb-6 pt-6 pl-6 pr-6">  
-    <?php if ($id == $_SESSION['id']) { ?>
-        <h1 class="title">Mi cuenta</h1>
-        <h2 class="subtitle">Actualizar datos de cuenta</h2>
-    <?php } else { ?>
-        <h1 class="title">Clientes</h1>
-        <h2 class="subtitle">Actualizar cliente</h2>
-    <?php } ?>
-</div>
 
-<div class="container pb-6 pt-6">
+        <section class="hero is-small">
+        <div class="hero-body">
+		<div class="container  pt-4 pb-4 pl-3">
+              
+        <h1 class="title">Clientes</h1>
+        <h2 class="subtitle">Actualizar datos del cliente.</h2> 
+            </div>
+        </div>
+    </section>
+    <div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
     <?php
         include "./inc/btn_back.php";
 

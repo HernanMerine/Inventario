@@ -7,11 +7,18 @@
 </head>
 <body>
     <div class="container is-fluid mb-6">
-        <h1 class="title">Categorías</h1>
-        <h2 class="subtitle">Nueva categoría</h2>
+       
     </div>
 
-    <div class="container pb-6 pt-6 pl-5 pr-5">
+    <section class="hero is-small">
+        <div class="hero-body">
+		<div class="container  pt-4 pb-4 pl-3">
+             <h1 class="title">Categorías</h1>
+        <h2 class="subtitle">Nueva categoría</h2>
+            </div>
+        </div>
+    </section>
+    <div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
         <div class="form-rest mb-6 mt-6"></div>
 
         <form action="./php/categoria_guardar.php" method="POST" class="FormularioAjax" autocomplete="off">

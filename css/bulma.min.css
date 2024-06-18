@@ -260,9 +260,9 @@ code,pre {
 body {
     color: #4a4a4a;
     
-        font-size: 120%;
+    font-size: 120%;
     font-weight: 400;
-    line-height: 1.5
+    line-height: 1.5;
 }
 
 a {

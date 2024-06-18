@@ -1,9 +1,19 @@
-<div class="container is-fluid mb-6">
-    <h1 class="title">Productos</h1>
-    <h2 class="subtitle">Lista de productos</h2>
-</div>
 
-<div class="container pb-6 pt-6 pl-6 pr-6">
+<section class="hero is-small">
+        <div class="hero-body">
+		<div class="container  pt-4 pb-4 pl-3">
+                <h1 class="title is-medium">
+                   Inventario
+                </h1>
+				
+                <h2 class="subtitle">
+                    Listado completo de productos.
+                </h2>
+			
+            </div>
+        </div>
+    </section>
+    <div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
     <?php
         require_once "./php/main.php";
 
@@ -27,8 +37,6 @@
         $url="index.php?vista=product_list&page="; /* <== */
         $registros=15;
         $busqueda="";
-
-        # Paginador producto #
         require_once "./php/producto_lista.php";
     ?>
 </div>

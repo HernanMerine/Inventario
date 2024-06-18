@@ -6,17 +6,15 @@ $conexion = conexion();
 $id = (isset($_GET['proveedor_id_up'])) ? $_GET['proveedor_id_up'] : 0;
 $id = limpiar_cadena($id);
 ?>
-<div class="container is-fluid mb-6">
-    <?php if ($id == $_SESSION['id']) { ?>
-        <h1 class="title">Mi cuenta</h1>
-        <h2 class="subtitle">Actualizar datos de cuenta</h2>
-    <?php } else { ?>
-        <h1 class="title">Proveedores</h1>
+<section class="hero is-small">
+        <div class="hero-body">
+		<div class="container  pt-4 pb-4 pl-3">
+                <h1 class="title">Proveedores</h1>
         <h2 class="subtitle">Actualizar proveedor</h2>
-    <?php } ?>
-</div>
-
-<div class="container pb-6 pt-6 pl-5 pr-5">
+            </div>
+        </div>
+    </section>
+    <div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
     <?php
     include "./inc/btn_back.php";
 
