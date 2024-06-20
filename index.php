@@ -4,7 +4,8 @@
     <head>
         <?php include "./inc/head.php"; ?>
     </head>
-    <body>
+    <body class="body-custom">
+    <div class="main-content">
         <?php
 
             if(!isset($_GET['vista']) || $_GET['vista']==""){
@@ -35,6 +36,7 @@
                 }
             }
         ?>
+        </div>
         <footer>
             <?php
                 include "./inc/footer.php";
@@ -42,5 +44,4 @@
         </footer>
     </body>
 
-    <?php    include "./inc/footer.php";  ?>
 </html>

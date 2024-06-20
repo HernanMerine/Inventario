@@ -263,13 +263,20 @@ code,pre {
 
 body {
     color: #4a4a4a;
-    
+    background-image: url('./../img/opcion2.png'); 
+    margin: 0;
+    padding: 0;
+     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     font-size: 120%;
     font-weight: 400;
     line-height: 1.5;
-    margin-bottom: 500px;
-  
+    min-height: 100vh; 
+    position: relative; 
+    margin-bottom: 100px;
 }
+
 
 a {
     color: #485fc7;
@@ -11684,6 +11691,30 @@ a.has-text-danger-dark:focus,a.has-text-danger-dark:hover {
 
 .footer {
     background-color: #363636;
-    color:#fafafa;
-    padding: 3rem 1.5rem 3rem
+    color: #fafafa;
+    padding: 3rem 1.5rem; 
 }
+
+
+.footer-custom {
+    background-color: #363636;
+    color: #fafafa;
+    padding: 1rem 1rem; 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+}
+
+.main-content {
+    flex: 1;
+
+    padding-bottom: 100px; 
+}
+
+
+
+
+
+
+
