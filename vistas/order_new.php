@@ -250,7 +250,7 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                                                         <button class="button is-danger is-rounded is-small" type="submit" name="remove_from_order">Eliminar</button>
                                                     </form>
                                                 </td>
-                                              </tr>';
+                                            </tr>';
                                         $totalOrden += $producto['subtotal'];
                                     }
                                 }
@@ -265,20 +265,15 @@ $busqueda = isset($_POST['buscar_producto']) ? $_POST['buscar_producto'] : '';
                             <div class="control">
                                 <input class="input" type="email" name="client_email" placeholder="Ingrese el correo electrónico del cliente" required>
                             </div>
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-primary is-medium" type="submit" name="send_order">Confirmar Orden</button>
+                                </div>
+                                <div class="control">
+                                    <button class="button is-warning is-medium" type="submit" name="empty_order">Vaciar Orden</button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-
-                    <div class="field is-grouped">
-                        <div class="control">
-                            <form method="post" style="display: inline;">
-                                <button class="button is-primary is-medium" type="submit" name="send_order">Confirmar Orden</button>
-                            </form>
-                        </div>
-                        <div class="control">
-                            <form method="post" style="display: inline;">
-                                <button class="button is-warning is-medium" type="submit" name="empty_order">Vaciar Orden</button>
-                            </form>
-                        </div>
                     </div>
                     </div>
                 </div>
