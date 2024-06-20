@@ -2,11 +2,11 @@
         <div class="hero-body">
 		<div class="container  pt-4 pb-4 pl-3">
                 <h1 class="title is-medium">
-                  Buscar Usuario 
+                  Usuarios
                 </h1>
 				
                 <h2 class="subtitle">
-                    Completa con los datos del usuario que quieras buscar.
+                    Buscar Usuario
                 </h2>
 			
             </div>

@@ -1,7 +1,7 @@
 
-<section class="hero is-small">
+    <section class="hero is-small">
         <div class="hero-body">
-		<div class="container  pt-4 pb-4 pl-3">
+		    <div class="container  pt-4 pb-4 pl-3">
                 <h1 class="title is-medium">
                    Inventario
                 </h1>

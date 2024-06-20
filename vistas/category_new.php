@@ -6,9 +6,6 @@
     <title>Formulario de Categorías</title>
 </head>
 <body>
-    <div class="container is-fluid mb-6">
-       
-    </div>
 
     <section class="hero is-small">
         <div class="hero-body">
