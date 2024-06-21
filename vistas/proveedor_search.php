@@ -17,7 +17,7 @@
         require_once "./php/main.php";
 
         if(isset($_POST['modulo_buscador'])){
-            require_once "./php/buscador.php"; // Cambiar a buscador_proveedor.php
+            require_once "./php/buscador.php"; 
         }
 
         if(!isset($_SESSION['busqueda_proveedor']) && empty($_SESSION['busqueda_proveedor'])){
