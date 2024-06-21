@@ -17,7 +17,7 @@
         require_once "./php/main.php";
     ?>
     <div class="columns">
-        <div class="column is-one-third">
+        <div class="column is-one-quarter">
             <h2 class="title has-text-centered">Categorías</h2>
             <?php
                 $conexion = conexion();
