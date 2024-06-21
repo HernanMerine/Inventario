@@ -3,16 +3,35 @@ ob_start();
 $inicio = ($pagina > 0) ? (($pagina * $registros) - $registros) : 0;
 $tabla = "";
 
-$campos = "producto.producto_id,producto.producto_nombre,producto.producto_precio,producto.producto_stock,producto.producto_foto,producto.categoria_id,producto.usuario_id,categoria.categoria_id,categoria.categoria_nombre,usuario.usuario_id,usuario.usuario_nombre,usuario.usuario_apellido";
+$campos = "producto.producto_id,producto.producto_nombre,producto.producto_precio,producto.producto_stock,producto.producto_foto,producto.categoria_id,producto.usuario_id,categoria.categoria_id,categoria.categoria_nombre,usuario.usuario_id,usuario.usuario_nombre,usuario.usuario_apellido, proveedor.proveedor_id, proveedor.proveedor_nombre";
 
 if (isset($busqueda) && $busqueda != "") {
-    $consulta_datos = "SELECT $campos FROM producto INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id WHERE producto.producto_nombre LIKE '%$busqueda%' ORDER BY producto.producto_nombre ASC LIMIT $inicio,$registros";
-    $consulta_total = "SELECT COUNT(producto_id) FROM producto WHERE producto_nombre LIKE '%$busqueda%'";
+    $consulta_datos = "SELECT $campos FROM producto 
+                       INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id 
+                       INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id 
+                       INNER JOIN proveedor ON producto.proveedor_id=proveedor.proveedor_id 
+                       WHERE producto.producto_nombre LIKE '%$busqueda%' OR proveedor.proveedor_nombre LIKE '%$busqueda%' 
+                       ORDER BY producto.producto_nombre ASC 
+                       LIMIT $inicio,$registros";
+    $consulta_total = "SELECT COUNT(producto_id) FROM producto 
+                       INNER JOIN proveedor ON producto.proveedor_id=proveedor.proveedor_id 
+                       WHERE producto.producto_nombre LIKE '%$busqueda%' OR proveedor.proveedor_nombre LIKE '%$busqueda%'";
 } elseif ($categoria_id > 0) {
-    $consulta_datos = "SELECT $campos FROM producto INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id WHERE producto.categoria_id='$categoria_id' ORDER BY producto.producto_nombre ASC LIMIT $inicio,$registros";
+    $consulta_datos = "SELECT $campos FROM producto 
+                       INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id 
+                       INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id 
+                       INNER JOIN proveedor ON producto.proveedor_id=proveedor.proveedor_id 
+                       WHERE producto.categoria_id='$categoria_id' 
+                       ORDER BY producto.producto_nombre ASC 
+                       LIMIT $inicio,$registros";
     $consulta_total = "SELECT COUNT(producto_id) FROM producto WHERE categoria_id='$categoria_id'";
 } else {
-    $consulta_datos = "SELECT $campos FROM producto INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id ORDER BY producto.producto_nombre ASC LIMIT $inicio,$registros";
+    $consulta_datos = "SELECT $campos FROM producto 
+                       INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id 
+                       INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id 
+                       INNER JOIN proveedor ON producto.proveedor_id=proveedor.proveedor_id 
+                       ORDER BY producto.producto_nombre ASC 
+                       LIMIT $inicio,$registros";
     $consulta_total = "SELECT COUNT(producto_id) FROM producto";
 }
 
@@ -38,6 +57,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                             <th>Precio</th>
                             <th>Stock</th>
                             <th>Categoria</th>
+                            <th>Proveedor</th>
                             <th>Registrado por</th>
                             <th colspan="3">Opciones</th>
                         </tr>
@@ -54,6 +74,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                         <td>' . $row['producto_precio'] . '</td>
                         <td>' . $row['producto_stock'] . '</td>
                         <td>' . $row['categoria_nombre'] . '</td>
+                        <td>' . $row['proveedor_nombre'] . '</td>
                         <td>' . $row['usuario_nombre'] . ' ' . $row['usuario_apellido'] .'</td>
                         <td><a href="index.php?vista=product_img&product_id_up=' . $row['producto_id'] . '" class="button is-link is-rounded is-small">Imagen</a></td>
                         <td><a href="' . $url . $pagina . '&product_id_del=' . $row['producto_id'] . '" class="button is-danger is-rounded is-small">Eliminar</a></td>
@@ -77,4 +98,3 @@ if ($total >= 1 && $pagina <= $Npaginas) {
     echo paginador_tablas($pagina, $Npaginas, $url, 7);
 }
 ob_end_flush();
-
