@@ -1,7 +1,8 @@
+
 <div class="main-container">
 
 	<form class="box login" action="" method="POST" autocomplete="off">
-		<h5 class="title is-5 has-text-centered is-uppercase">Sistema de inventario</h5>
+		<img src="./img/1.png" alt="logo">
 
 		<div class="field">
 			<label class="label">Usuario</label>

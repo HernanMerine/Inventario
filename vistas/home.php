@@ -27,7 +27,7 @@
                             <h3 class="title is-4">Usuarios</h3>
                             <p>Gestiona los usuarios y sus roles.
                                 <br></p>
-                            <a href="index.php?vista=user_list" class="button is-link">Ayuda</a>
+                            <a href="index.php?vista=user_list" class="button is-link">Ver Usuarios</a>
                         </div>
                     </div>
                 <?php } ?>
@@ -38,7 +38,7 @@
                         </figure>
                         <h3 class="title is-4">Clientes</h3>
                         <p>Gestiona los datos de tus clientes.<br></p>
-                        <a href="index.php?vista=client_list" class="button is-link">Configuración</a>
+                        <a href="index.php?vista=client_list" class="button is-link">Ver Clientes</a>
                     </div>
                 </div>
                 <div class="column">
@@ -47,7 +47,7 @@
 						<img src="./img/ordencompra.png"  alt="Órdenes de Compra">
                         </figure>
                         <h3 class="title is-4">Órdenes de Compra</h3>
-                        <p>Gestiona las órdenes de compra de tus clientes de manera eficiente.</p>
+                        <p>Gestiona las órdenes de compra de tus clientes.</p>
                         <a href="index.php?vista=user_list" class="button is-link">Ver Órdenes de Compra</a>
                     </div>
                 </div>
@@ -78,15 +78,15 @@
                             <a href="index.php?vista=proveedor_list" class="button is-link">Ver Proveedores</a>
                         </div>
                     </div>
-                    <div class="column">
-                        <div class="box">
+                     <div class="column">
+                        <!-- <div class="box">
                             <figure class="image is-128x128">
                                 <img src="./img/reportes.png" alt="Reportes">
                             </figure>
                             <h3 class="title is-4">Reportes</h3>
                             <p>Genera reportes detallados sobre el inventario y las ordenes de compra.</p>
                             <a href="#" class="button is-link">Ver Reportes</a>
-                        </div>
+                        </div> -->
                     </div>
                 <?php } ?>     
             </div>
