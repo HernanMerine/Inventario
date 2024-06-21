@@ -1,23 +1,26 @@
 <?php
 
-    /*== Almacenando datos ==*/
-    $client_id_del = limpiar_cadena($_GET['client_id_del']);
+require_once "main.php";
 
-    // Obteniendo la conexión a la base de datos
-    $conexion = conexion();
+/*== Almacenando datos ==*/
+$client_id_del = limpiar_cadena($_GET['client_id_del']);
 
-    if ($conexion->connect_error) {
-        die("Connection failed: " . $conexion->connect_error);
-    }
+// Obteniendo la conexión a la base de datos
+$conexion = conexion();
 
-    /*== Verificando cliente ==*/
-    $check_cliente = $conexion->query("SELECT cliente_id FROM cliente WHERE cliente_id='$client_id_del'");
+if ($conexion->connect_error) {
+    die("Connection failed: " . $conexion->connect_error);
+}
 
-    if ($check_cliente === false) {
-        die("Error en la consulta SQL: " . $conexion->error);
-    }
+/*== Verificando cliente ==*/
+$check_cliente = $conexion->query("SELECT cliente_id FROM cliente WHERE cliente_id='$client_id_del'");
 
-    if ($check_cliente->num_rows == 1) {
+if ($check_cliente === false) {
+    die("Error en la consulta SQL: " . $conexion->error);
+}
+
+if ($check_cliente->num_rows == 1) {
+    try {
         // Eliminando el cliente
         $eliminar_cliente = $conexion->query("DELETE FROM cliente WHERE cliente_id='$client_id_del'");
 
@@ -36,15 +39,31 @@
                 </div>
             ';
         }
-    } else {
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrió un error inesperado!</strong><br>
-                El CLIENTE que intenta eliminar no existe
-            </div>
-        ';
+    } catch (mysqli_sql_exception $e) {
+        if ($e->getCode() == 1451) {
+            echo '
+                <div class="notification is-danger is-light">
+                    <strong>¡Ocurrió un error inesperado!</strong><br>
+                    No se pudo eliminar el cliente porque realizó compras anteriormente.
+                </div>
+            ';
+        } else {
+            echo '
+                <div class="notification is-danger is-light">
+                    <strong>¡Ocurrió un error inesperado!</strong><br>
+                    No se pudo eliminar el cliente, por favor inténtelo nuevamente.
+                </div>
+            ';
+        }
     }
+} else {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            El CLIENTE que intenta eliminar no existe
+        </div>
+    ';
+}
 
-    $check_cliente->close();
-    $conexion->close();
-    
+$check_cliente->close();
+$conexion->close();
