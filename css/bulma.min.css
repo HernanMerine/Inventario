@@ -1,5 +1,5 @@
 /*! bulma.io v0.9.3 | MIT License | github.com/jgthms/bulma */
-.button,.file-cta,.file-name,.input,.pagination-ellipsis,.pagination-link,.pagination-next,.pagination-previous,.select select,.textarea {
+.button,.file-cta,.file-name,.input,.pagination-ellipsis,.pagination-link,.select select,.textarea {
     -moz-appearance: none;
     -webkit-appearance: none;
     align-items: center;
@@ -19,6 +19,19 @@
     vertical-align: top;
     -webkit-appearance: none; /* Propiedad con prefijo de proveedor */
     appearance: none;   
+    
+}
+
+.pagination-next,.pagination-previous {
+    align-items: center;
+    padding-bottom: calc(.5em - 1px);
+    padding-left: calc(.75em - 1px);
+    padding-right: calc(.75em - 1px);
+    padding-top: calc(.5em - 1px);
+    white-space: nowrap;
+    background-color: #485fc7;
+    border-color: #485fc7;
+    color: #fff;
 }
 
 .button:active,.button:focus,.file-cta:active,.file-cta:focus,.file-name:active,.file-name:focus,.input:active,.input:focus,.is-active.button,.is-active.file-cta,.is-active.file-name,.is-active.input,.is-active.pagination-ellipsis,.is-active.pagination-link,.is-active.pagination-next,.is-active.pagination-previous,.is-active.textarea,.is-focused.button,.is-focused.file-cta,.is-focused.file-name,.is-focused.input,.is-focused.pagination-ellipsis,.is-focused.pagination-link,.is-focused.pagination-next,.is-focused.pagination-previous,.is-focused.textarea,.pagination-ellipsis:active,.pagination-ellipsis:focus,.pagination-link:active,.pagination-link:focus,.pagination-next:active,.pagination-next:focus,.pagination-previous:active,.pagination-previous:focus,.select select.is-active,.select select.is-focused,.select select:active,.select select:focus,.textarea:active,.textarea:focus {
@@ -6120,8 +6133,8 @@ body.has-navbar-fixed-bottom,html.has-navbar-fixed-bottom {
     text-align: center
 }
 
-.pagination-link,.pagination-next,.pagination-previous {
-    border-color: #dbdbdb;
+.pagination-link {
+    border-color: darkgray;
     color: #363636;
     min-width: 2.5em
 }
@@ -6143,15 +6156,10 @@ body.has-navbar-fixed-bottom,html.has-navbar-fixed-bottom {
     background-color: #636fa7;
     border-color: #dbdbdb;
     box-shadow: none;
-    color: #c9c9c9;
-    opacity: .8;
+    color: #c9c0c9;
+    opacity: .6;
 }
 
-.pagination-next,.pagination-previous {
-    padding-left: .75em;
-    padding-right: .75em;
-    white-space: nowrap
-}
 
 .pagination-link.is-current {
     background-color: #485fc7;
