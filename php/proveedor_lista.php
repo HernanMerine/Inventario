@@ -9,9 +9,14 @@ $campos = "proveedor.proveedor_id, proveedor.proveedor_nombre, proveedor.proveed
 
 if (isset($busqueda) && $busqueda != "") {
     $busqueda = $conexion->real_escape_string($busqueda);
-    $consulta_datos = "SELECT $campos FROM proveedor WHERE (proveedor_nombre LIKE '%$busqueda%' OR proveedor_mail LIKE '%$busqueda%' OR proveedor_telefono LIKE '%$busqueda%' OR proveedor_vendedor LIKE '%$busqueda%' OR proveedor_direccion LIKE '%$busqueda%') ORDER BY proveedor_nombre ASC LIMIT $inicio, $registros";
+    $consulta_datos = "SELECT $campos FROM proveedor 
+    WHERE (proveedor_nombre LIKE '%$busqueda%' OR proveedor_mail LIKE '%$busqueda%' OR proveedor_telefono LIKE '%$busqueda%' 
+    OR proveedor_vendedor LIKE '%$busqueda%' OR proveedor_direccion LIKE '%$busqueda%') 
+    ORDER BY proveedor_nombre ASC LIMIT $inicio, $registros";
 
-    $consulta_total = "SELECT COUNT(proveedor_id) FROM proveedor WHERE (proveedor_nombre LIKE '%$busqueda%' OR proveedor_mail LIKE '%$busqueda%' OR proveedor_telefono LIKE '%$busqueda%' OR proveedor_vendedor LIKE '%$busqueda%' OR proveedor_direccion LIKE '%$busqueda%')";
+    $consulta_total = "SELECT COUNT(proveedor_id) FROM proveedor 
+    WHERE (proveedor_nombre LIKE '%$busqueda%' OR proveedor_mail LIKE '%$busqueda%' OR proveedor_telefono LIKE '%$busqueda%' 
+    OR proveedor_vendedor LIKE '%$busqueda%' OR proveedor_direccion LIKE '%$busqueda%')";
 } else {
     $consulta_datos = "SELECT $campos FROM proveedor ORDER BY proveedor_nombre ASC LIMIT $inicio, $registros";
 
