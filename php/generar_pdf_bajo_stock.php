@@ -5,10 +5,49 @@ use Dompdf\Dompdf;
 function generarPDFBajoStock($productos) {
     $dompdf = new Dompdf();
 
-    // Crear el contenido HTML
-    $html = '<h1>Productos con Bajo Stock</h1>';
-    $html .= '<table border="1" cellpadding="10">';
-    $html .= '<tr><th>ID</th><th>Nombre</th><th>Stock</th><th>Stock Mínimo</th><th>Proveedor</th></tr>';
+    // Crear el contenido HTML con estilos CSS
+    $html = '<html>
+                <head>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                        }
+                        h1 {
+                            text-align: center;
+                            color: #333;
+                        }
+                        .table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-bottom: 1rem;
+                        }
+                        .table thead {
+                            background-color: #6a93c7;
+                            color: white;
+                        }
+                        .table th, .table td {
+                            border: 1px solid #ccc;
+                            padding: 8px;
+                            text-align: left;
+                        }
+                        .table tbody tr:nth-child(even) {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Productos con Bajo Stock</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Stock</th>
+                                <th>Stock Mínimo</th>
+                                <th>Proveedor</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
 
     // Añadir filas para cada producto
     foreach ($productos as $producto) {
@@ -21,7 +60,9 @@ function generarPDFBajoStock($productos) {
         $html .= '</tr>';
     }
 
-    $html .= '</table>';
+    $html .= '</tbody></table>
+                </body>
+            </html>';
 
     // Cargar el contenido HTML en DOMPDF
     $dompdf->loadHtml($html);
