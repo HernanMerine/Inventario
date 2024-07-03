@@ -3,7 +3,10 @@ ob_start();
 $inicio = ($pagina > 0) ? (($pagina * $registros) - $registros) : 0;
 $tabla = "";
 
-$campos = "producto.producto_id,producto.producto_nombre,producto.producto_precio,producto.producto_stock,producto.producto_foto,producto.categoria_id,producto.usuario_id,categoria.categoria_id,categoria.categoria_nombre,usuario.usuario_id,usuario.usuario_nombre,usuario.usuario_apellido, proveedor.proveedor_id, proveedor.proveedor_nombre";
+
+
+ $campos = "producto.producto_id,producto.producto_nombre,producto.producto_precio,producto.producto_stock, producto.producto_stock_minimo,producto.producto_foto,producto.categoria_id,producto.usuario_id,categoria.categoria_id,categoria.categoria_nombre,usuario.usuario_id,usuario.usuario_nombre,usuario.usuario_apellido, proveedor.proveedor_id, proveedor.proveedor_nombre";
+
 
 if (isset($busqueda) && $busqueda != "") {
     $consulta_datos = "SELECT $campos FROM producto 
@@ -56,6 +59,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                             <th>Producto</th>
                             <th>Precio</th>
                             <th>Stock</th>
+                            <th>Stock Mínimo</th>
                             <th>Categoria</th>
                             <th>Proveedor</th>
                             <th>Registrado por</th>
@@ -73,6 +77,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                         <td>' . $row['producto_nombre'] . '</td>
                         <td>' . $row['producto_precio'] . '</td>
                         <td>' . $row['producto_stock'] . '</td>
+                        <td>' . $row['producto_stock_minimo'] . '</td>
                         <td>' . $row['categoria_nombre'] . '</td>
                         <td>' . $row['proveedor_nombre'] . '</td>
                         <td>' . $row['usuario_nombre'] . ' ' . $row['usuario_apellido'] .'</td>

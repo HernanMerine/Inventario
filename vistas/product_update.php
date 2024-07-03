@@ -1,18 +1,16 @@
 <section class="hero is-small">
-        <div class="hero-body">
-		<div class="container  pt-4 pb-4 pl-3">
-               <h1 class="title is-medium">
-                  Productos.
-                </h1>
-				
-                <h2 class="subtitle">
-                  Actualiza los datos del producto.
-                </h2>
-			
-            </div>
+    <div class="hero-body">
+        <div class="container pt-4 pb-4 pl-3">
+            <h1 class="title is-medium">
+                Productos.
+            </h1>
+            <h2 class="subtitle">
+                Actualiza los datos del producto.
+            </h2>
         </div>
-    </section>
-    <div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
+    </div>
+</section>
+<div class="container pb-6 pt-6 pl-5 pr-5 mb-6">
     <?php
         include "./inc/btn_back.php";
 
@@ -64,6 +62,14 @@
                     <input class="input" type="text" name="producto_stock" pattern="[0-9]{1,25}" maxlength="25" required value="<?php echo $datos['producto_stock']; ?>">
                 </div>
             </div>
+            <div class="column">
+                <div class="control">
+                    <label>Stock Mínimo</label>
+                    <input class="input" type="text" name="producto_stock_minimo" pattern="[0-9]{1,25}" maxlength="25" required value="<?php echo $datos['producto_stock_minimo']; ?>">
+                </div>
+            </div>
+        </div>
+        <div class="columns">
             <div class="column">
                 <label>Categoría</label><br>
                 <div class="select is-rounded">

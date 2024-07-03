@@ -27,10 +27,11 @@ $nombre = limpiar_cadena($_POST['producto_nombre']);
 $costo = limpiar_cadena($_POST['producto_costo']);
 $porcentaje = limpiar_cadena($_POST['producto_porcentaje']);
 $stock = limpiar_cadena($_POST['producto_stock']);
+$stock_minimo = limpiar_cadena($_POST['producto_stock_minimo']);
 $categoria = limpiar_cadena($_POST['producto_categoria']);
 
 /*== Verificando campos obligatorios ==*/
-if ($nombre == "" || $costo == "" || $stock == "" || $categoria == "") {
+if ($nombre == "" || $costo == "" || $stock == "" || $stock_minimo == "" || $categoria == "") {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -66,7 +67,7 @@ if (verificar_datos("[0-9.]{1,25}", $porcentaje)) {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
-            El PRECIO no coincide con el formato solicitado
+            El PORCENTAJE no coincide con el formato solicitado
         </div>
     ';
     exit();
@@ -82,6 +83,15 @@ if (verificar_datos("[0-9]{1,25}", $stock)) {
     exit();
 }
 
+if (verificar_datos("[0-9]{1,25}", $stock_minimo)) {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            El STOCK MÍNIMO no coincide con el formato solicitado
+        </div>
+    ';
+    exit();
+}
 
 /*== Verificando nombre ==*/
 if ($nombre != $datos['producto_nombre']) {
@@ -119,7 +129,7 @@ if ($categoria != $datos['categoria_id']) {
 
 /*== Actualizando datos ==*/
 $precio_calculado = $costo + ($costo * $porcentaje / 100);
-$query_update = "UPDATE producto SET producto_nombre='$nombre', producto_costo='$costo', producto_precio = '$precio_calculado', producto_stock='$stock', categoria_id='$categoria', porcentaje='$porcentaje' WHERE producto_id='$id'";
+$query_update = "UPDATE producto SET producto_nombre='$nombre', producto_costo='$costo', producto_precio='$precio_calculado', producto_stock='$stock', producto_stock_minimo='$stock_minimo', categoria_id='$categoria', porcentaje='$porcentaje' WHERE producto_id='$id'";
 if (mysqli_query($conexion, $query_update)) {
     echo '
         <div class="notification is-info is-light">

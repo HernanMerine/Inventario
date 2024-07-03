@@ -7,11 +7,12 @@ $nombre = limpiar_cadena($_POST['producto_nombre']);
 $costo = limpiar_cadena($_POST['producto_costo']);
 $porcentaje = limpiar_cadena($_POST['producto_porcentaje']);
 $stock = limpiar_cadena($_POST['producto_stock']);
+$stock_minimo = limpiar_cadena($_POST['producto_stock_minimo']);
 $categoria = limpiar_cadena($_POST['producto_categoria']);
 $proveedor = limpiar_cadena($_POST['producto_proveedor']);
 
 /*== Verificando campos obligatorios ==*/
-if ($proveedor == "" || $nombre == "" || $costo == "" || $stock == "" || $categoria == "") {
+if ($proveedor == "" || $nombre == "" || $costo == "" || $stock == "" || $categoria == "" ||  $stock_minimo =="") {
     echo '
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
@@ -60,6 +61,16 @@ if (verificar_datos("[0-9]{1,25}", $stock)) {
         <div class="notification is-danger is-light">
             <strong>¡Ocurrió un error inesperado!</strong><br>
             El STOCK no coincide con el formato solicitado
+        </div>
+    ';
+    exit();
+}
+
+if (verificar_datos("[0-9]{1,25}", $stock_minimo)) {
+    echo '
+        <div class="notification is-danger is-light">
+            <strong>¡Ocurrió un error inesperado!</strong><br>
+            El STOCK MINIMO no coincide con el formato solicitado
         </div>
     ';
     exit();
@@ -184,7 +195,7 @@ if ($_FILES['producto_foto']['name'] != "" && $_FILES['producto_foto']['size'] >
 /*== Guardando datos ==*/
 $conexion = conexion();
 $precio_calculado = $costo + ($costo * $porcentaje / 100);
-$query_guardar_producto = "INSERT INTO producto (producto_nombre, producto_costo, producto_precio, porcentaje, producto_stock, producto_foto, categoria_id, usuario_id, proveedor_id) VALUES ('$nombre', '$costo', '$precio_calculado', '$porcentaje', '$stock', '$foto', '$categoria', '$_SESSION[id]', '$proveedor')";
+$query_guardar_producto = "INSERT INTO producto (producto_nombre, producto_costo, producto_precio, porcentaje, producto_stock, producto_stock_minimo, producto_foto, categoria_id, usuario_id, proveedor_id) VALUES ('$nombre', '$costo', '$precio_calculado', '$porcentaje', '$stock', '$stock_minimo', '$foto', '$categoria', '$_SESSION[id]', '$proveedor')";
 if (mysqli_query($conexion, $query_guardar_producto)) {
     echo '
         <div class="notification is-info is-light">
