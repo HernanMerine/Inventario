@@ -51,6 +51,7 @@
                         <a href="index.php?vista=proveedor_new" class="navbar-item">Nuevo Proveedor</a>
                         <a href="index.php?vista=proveedor_list" class="navbar-item">Lista de Proveedores</a>
                         <a href="index.php?vista=proveedor_search" class="navbar-item">Buscar</a>
+                        <a href="index.php?vista=proveedor_pedido" class="navbar-item">Pedido a Proveedor</a>
                     </div>
                 </div>
 
